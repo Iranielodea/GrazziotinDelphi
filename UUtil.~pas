@@ -1,0 +1,261 @@
+unit UUtil;
+
+interface
+
+Uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Menus, ToolWin, ComCtrls, DB,
+  IBCustomDataSet, IBQuery, ExtCtrls, Buttons, Mask, DBCtrls, IBDatabase, ppReport, QuickRpt,
+  Math, DBClient, SqlExpr;
+
+   function Confirma(Texto: pchar; botao: string): Integer;
+   function ContaReg(Tabela: TClientDataSet): integer;
+   function ContaReg2(Tabela: TSQLQuery): integer;
+   procedure GravaTab(Tabela: TClientDataSet);
+   procedure Mensagem(Texto: Pchar);
+   procedure ComandoQuery(Tabela: TSQLQuery; Comando: string);
+   procedure ComandoCli(Tabela: TClientDataSet; Comando: string);
+   procedure Procura(Tabela: TClientDataSet; Campo: string);
+   function TrocaCar(Campo, Antigo, Novo: string): string;
+   function CVal(Campo: string): string;
+   function TiraCar(Campo,Caracter: string): string;
+   procedure LimpaTela(Formulario: TForm);
+   function preparaextenso(Valor: string): double;
+   {procedure IniTrans;
+   procedure GravaTrans;
+   procedure CancelaTrans;}
+   function DataIngles(Data: string): string;
+   function DataErro(Data: string): string;
+   procedure ModoEdicao(Tabela: TClientDataSet);
+   procedure GravaZeroDataSet(Tabela: TClientDataSet);
+   procedure Pesquisa(Query: TSqlDataSet; Tabela: TClientDataSet; Comando: string);
+   procedure TamanhoPagina(Relatorio: TppReport);
+
+implementation
+
+uses UDM, UDMBanco;
+
+procedure TamanhoPagina(Relatorio: TppReport);
+begin
+   Relatorio.PrinterSetup.MarginBottom:=dm.RelM_INFERIOR.AsFloat;
+   Relatorio.PrinterSetup.MarginTop:=dm.RelM_SUPERIOR.AsFloat;
+   Relatorio.PrinterSetup.PaperHeight:=dm.RelALTURA.AsFloat;
+   Relatorio.PrinterSetup.PaperWidth:=dm.RelLARGURA.AsFloat;
+end;
+
+function preparaextenso(Valor: string): double;
+var i: integer;
+   vv: string[30];
+begin
+   vv:='';
+   for i:=1 to length(valor) do
+   begin
+      if copy(valor,i,1) = '.' then
+         continue;
+      vv:=vv + copy(valor,i,1);
+   end;
+   if vv = '' then
+      vv:='0';
+   result:=strtofloat(vv);
+end;
+
+procedure Pesquisa(Query: TSqlDataSet; Tabela: TClientDataSet; Comando: string);
+begin
+   Tabela.Close;
+   Tabela.CommandText:=Query.CommandText+' '+Comando;
+   Tabela.Open;
+end;
+
+procedure GravaZeroDataSet(Tabela: TClientDataSet);
+var I: integer;
+begin
+   for I:=0 to Tabela.FieldCount-1 do
+   begin
+      if Tabela.Fields[I].DefaultExpression <> '' then
+      begin
+         if Tabela.Fields[I].IsNull then
+            Tabela.Fields[I].Value:=0;
+      end;
+   end;
+end;
+
+function TrocaCar(Campo, Antigo, Novo: string): string;
+var i: integer;
+   b: string;
+begin
+   b:='';
+   for i:=1 to length(campo) do
+   begin
+      if copy(campo,i,1) = Antigo then
+         b:=b + Novo
+      else
+         b:=b + copy(campo,i,1);
+   end;
+   result:=b;
+end;
+
+procedure ModoEdicao(Tabela: TClientDataSet);
+begin
+   if not (Tabela.State in [dsedit,dsinsert]) then
+      Tabela.Edit;
+end;
+
+procedure LimpaTela(Formulario: TForm);
+var i: integer;
+begin
+   for i:=0 to Formulario.ComponentCount - 1 do
+   begin
+      if (formulario.Components[i] is Tedit) then
+         TEdit(Formulario.Components[I]).Clear;
+      if (formulario.Components[i] is TmaskEdit) then
+         TMaskEdit(Formulario.Components[I]).Clear;
+   end;
+end;
+
+function DataErro(Data: string): string;
+begin
+   if copy(data,1,1) = ' ' then
+   begin
+      result:='N';
+      exit;
+   end;
+   try
+      strtodate(data);
+      result:='N';
+      except begin
+         mensagem('Data inválida');
+         result:='S';
+      end;
+   end;
+end;
+
+function DataIngles(Data: string): string;
+var vdia,vmes,vano: word;
+   vdata: string[15];
+begin
+   decodedate(strtodate(data),vano,vmes,vdia);
+   vdata:='"'+inttostr(vmes)+'/'+inttostr(vdia)+'/'+inttostr(vano)+'"';
+   result:=vdata;
+end;
+
+{procedure IniTrans;
+begin
+   if not dmBanco.BancoDados.InTransaction then
+      dmBanco.BancoDados.StartTransaction(TransDesc);
+end;
+
+procedure GravaTrans;
+begin
+   if dmBanco.BancoDados.InTransaction then
+      dmBanco.BancoDados.Commit(TransDesc);
+end;
+
+procedure CancelaTrans;
+begin
+   if dmBanco.BancoDados.InTransaction then
+      dmBanco.BancoDados.Rollback(TransDesc);
+end;}
+
+function TiraCar(Campo,Caracter: string): string;
+var i: integer;
+    a: string;
+begin
+   a:='';
+   for i:=1 to length(Campo) do
+   begin
+      if copy(campo,i,1) = Caracter then
+         continue;
+      a:=a +copy(campo,i,1);
+   end;
+   result:=a;
+end;
+
+function CVal(Campo: string): string;
+var vvalor: string[20];
+begin
+   if Campo = '' then
+      result:='0'
+   else begin
+      vvalor:=TiraCar(Campo,'.');
+      result:=trocaCar(vvalor,',','.');
+   end;
+end;
+
+function ContaReg2(Tabela: TSQLQuery): integer;
+var i: integer;
+begin
+   i:=0;
+   while not Tabela.Eof do
+   begin
+      if i > 2 then
+         break;
+      inc(i);
+      tabela.Next;
+   end;
+   Tabela.First;
+   result:=i;
+end;
+
+procedure Procura(Tabela: TClientDataSet; Campo: string);
+begin
+   Tabela.Close;
+   Tabela.Params[0].Text:=Campo;
+   Tabela.Open;
+end;
+
+procedure ComandoCli(Tabela: TClientDataSet; Comando: string);
+begin
+   Tabela.close;
+   dm.Qsql.sql.text:=comando;
+   Tabela.open;
+end;
+
+procedure ComandoQuery(Tabela: TSQLQuery; Comando: string);
+begin
+   Tabela.close;
+   Tabela.sql.text:=Comando;
+   Tabela.open;
+end;
+
+function ContaReg(Tabela: TClientDataSet): integer;
+var vcont: integer;
+begin
+   vcont:=0;
+   while not Tabela.Eof do
+   begin
+      if vcont > 2 then
+         break;
+      vcont:=vcont + 1;
+      Tabela.Next;
+   end;
+   Tabela.First;
+   result:=vcont;
+end;
+
+procedure Mensagem(Texto: Pchar);
+begin
+     Application.MessageBox(Texto,'Informação',mb_Ok+mb_iconInformation);
+end;
+
+
+procedure GravaTab(Tabela: TClientDataSet);
+var verro: integer;
+begin
+   verro:=Tabela.ApplyUpdates(0);
+   if verro <> 0 then
+      Mensagem('Erro ao Gravar os dados');
+end;
+
+//***********************************************
+// abre caixa de dialogo para confirmacao sim/nao
+//***********************************************
+function Confirma(Texto: pchar; botao: string): Integer;
+begin
+   if botao = 'S' then
+      result:=application.MessageBox(Texto,'Confirmação',mb_YesNo + mb_IconQuestion + mb_DefButton1)
+   else
+      result:=application.MessageBox(Texto,'Confirmação',mb_YesNo + mb_IconQuestion + mb_DefButton2);
+end;
+
+end.
+ 

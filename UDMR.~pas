@@ -1,0 +1,81 @@
+unit UDMR;
+
+interface
+
+uses
+  SysUtils, Classes, FMTBcd, DB, SqlExpr;
+
+type
+  TDMR = class(TDataModule)
+    QSeloAnt: TSQLQuery;
+    QSeloAntNUMSELO: TFloatField;
+    QSeloAntNUMORDEM: TFloatField;
+    QSeloAntDATA: TSQLTimeStampField;
+    spUltimoSelo: TSQLStoredProc;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function Get_SeloAnterior(inCliente, inSerie: String): String;
+    function Busca_UltimoSelo(inCodPessoa,inSerie,inSeloAtual: string): String;
+  end;
+
+var
+  DMR: TDMR;
+
+implementation
+
+uses UDMBanco;
+
+{$R *.dfm}
+
+function TDMR.Busca_UltimoSelo(inCodPessoa, inSerie,
+  inSeloAtual: string): String;
+var
+   vlSelo: String;
+begin
+{
+   stored procedure
+   busca o ultimo selo do extintor
+}
+   spUltimoSelo.Close;
+   spUltimoSelo.ParamByName('CODPESSOA').Text:=inCodPessoa;
+   spUltimoSelo.paramByName('SERIE').Text:=inSerie;
+   spUltimoSelo.ParamByName('NUMSELO').Text:=inSeloAtual;
+   spUltimoSelo.ExecProc;
+
+   vlSelo:=spUltimoSelo.paramByName('SELOANTERIOR').Text;
+   if vlSelo = '' then
+      vlSelo:='NULL';
+      
+   result:=vlSelo;
+end;
+
+function TDMR.Get_SeloAnterior(inCliente, inSerie: String): String;
+var vlRetorno: String;
+var vlAtual: String;
+begin
+//codpessoa = 2
+//"9850"
+
+   vlRetorno:='null';
+   QseloAnt.Close;
+   QSeloAnt.ParamByName('CODPESSOA').Text:=inCliente;
+   QSeloAnt.ParamByName('SERIE').Text:=inSerie;
+   QSeloAnt.Open;
+   vlAtual:=QSeloAntNUMSELO.Text;
+   while not QseloAnt.Eof do
+   begin
+      if QSeloAntNUMSELO.Text <> vlAtual then
+      begin
+         vlRetorno:=QSeloAntNUMSELO.Text;
+         break;
+      end;
+      QseloAnt.Next;
+   end;
+   QSeloAnt.Close;
+   
+   Result:=vlRetorno;
+end;
+
+end.

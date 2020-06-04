@@ -1,0 +1,605 @@
+object fProposta: TfProposta
+  Left = 52
+  Top = 72
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'Proposta'
+  ClientHeight = 367
+  ClientWidth = 707
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 16
+    Width = 60
+    Height = 13
+    HelpType = htKeyword
+    Caption = 'Proposta N'#186':'
+  end
+  object Label2: TLabel
+    Left = 152
+    Top = 16
+    Width = 35
+    Height = 13
+    HelpType = htKeyword
+    Caption = 'Cliente:'
+  end
+  object Label9: TLabel
+    Left = 8
+    Top = 40
+    Width = 42
+    Height = 13
+    HelpType = htKeyword
+    Caption = 'Emiss'#227'o:'
+  end
+  object Label3: TLabel
+    Left = 152
+    Top = 40
+    Width = 40
+    Height = 13
+    HelpType = htKeyword
+    Caption = 'Entrega:'
+  end
+  object Label4: TLabel
+    Left = 328
+    Top = 40
+    Width = 44
+    Height = 13
+    HelpType = htKeyword
+    Caption = 'Validade:'
+  end
+  object Label7: TLabel
+    Left = 512
+    Top = 40
+    Width = 59
+    Height = 13
+    HelpType = htKeyword
+    Caption = 'Cond.Pagto:'
+  end
+  object Label6: TLabel
+    Left = 8
+    Top = 64
+    Width = 49
+    Height = 13
+    HelpType = htKeyword
+    Caption = 'Vendedor:'
+  end
+  object butVendedor: TSpeedButton
+    Left = 563
+    Top = 8
+    Width = 25
+    Height = 22
+    Hint = 'Pesquisa Cadastro'
+    Glyph.Data = {
+      76010000424D7601000000000000760000002800000020000000100000000100
+      04000000000000010000130B0000130B00001000000000000000000000000000
+      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+      33033333333333333F7F3333333333333000333333333333F777333333333333
+      000333333333333F777333333333333000333333333333F77733333333333300
+      033333333FFF3F777333333700073B703333333F7773F77733333307777700B3
+      33333377333777733333307F8F8F7033333337F333F337F3333377F8F9F8F773
+      3333373337F3373F3333078F898F870333337F33F7FFF37F333307F99999F703
+      33337F377777337F3333078F898F8703333373F337F33373333377F8F9F8F773
+      333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
+      333333773FF77333333333370007333333333333777333333333}
+    NumGlyphs = 2
+    ParentShowHint = False
+    ShowHint = True
+    OnClick = butVendedorClick
+  end
+  object SpeedButton1: TSpeedButton
+    Left = 507
+    Top = 56
+    Width = 25
+    Height = 22
+    Hint = 'Pesquisa Cadastro'
+    Glyph.Data = {
+      76010000424D7601000000000000760000002800000020000000100000000100
+      04000000000000010000130B0000130B00001000000000000000000000000000
+      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+      33033333333333333F7F3333333333333000333333333333F777333333333333
+      000333333333333F777333333333333000333333333333F77733333333333300
+      033333333FFF3F777333333700073B703333333F7773F77733333307777700B3
+      33333377333777733333307F8F8F7033333337F333F337F3333377F8F9F8F773
+      3333373337F3373F3333078F898F870333337F33F7FFF37F333307F99999F703
+      33337F377777337F3333078F898F8703333373F337F33373333377F8F9F8F773
+      333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
+      333333773FF77333333333370007333333333333777333333333}
+    NumGlyphs = 2
+    ParentShowHint = False
+    ShowHint = True
+    OnClick = SpeedButton1Click
+  end
+  object Label5: TLabel
+    Left = 400
+    Top = 279
+    Width = 54
+    Height = 13
+    HelpType = htKeyword
+    Caption = 'Desconto%'
+  end
+  object Label11: TLabel
+    Left = 496
+    Top = 280
+    Width = 74
+    Height = 16
+    HelpType = htKeyword
+    Caption = 'Total Bruto:'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label8: TLabel
+    Left = 600
+    Top = 280
+    Width = 88
+    Height = 16
+    HelpType = htKeyword
+    Caption = 'Total L'#237'quido:'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object NumProposta: TMaskEdit
+    Left = 72
+    Top = 8
+    Width = 73
+    Height = 21
+    EditMask = '#######;0;_'
+    MaxLength = 7
+    TabOrder = 0
+    OnEnter = NumPropostaEnter
+    OnExit = NumPropostaExit
+  end
+  object CodPessoa: TDBEdit
+    Left = 200
+    Top = 8
+    Width = 57
+    Height = 21
+    DataField = 'CODPESSOA'
+    DataSource = dsCad
+    TabOrder = 1
+    OnEnter = CodPessoaEnter
+    OnExit = CodPessoaExit
+  end
+  object Nome: TEdit
+    Left = 264
+    Top = 8
+    Width = 297
+    Height = 21
+    CharCase = ecUpperCase
+    Color = clSilver
+    TabOrder = 2
+    OnEnter = NomeEnter
+    OnExit = NomeExit
+  end
+  object DBEdit2: TDBEdit
+    Left = 72
+    Top = 32
+    Width = 73
+    Height = 21
+    DataField = 'EMISSAO'
+    DataSource = dsCad
+    TabOrder = 3
+  end
+  object DBEdit3: TDBEdit
+    Left = 200
+    Top = 32
+    Width = 121
+    Height = 21
+    CharCase = ecUpperCase
+    DataField = 'ENTREGA'
+    DataSource = dsCad
+    TabOrder = 4
+  end
+  object DBEdit4: TDBEdit
+    Left = 384
+    Top = 32
+    Width = 121
+    Height = 21
+    CharCase = ecUpperCase
+    DataField = 'VALIDADE'
+    DataSource = dsCad
+    TabOrder = 5
+  end
+  object DBEdit5: TDBEdit
+    Left = 576
+    Top = 32
+    Width = 121
+    Height = 21
+    CharCase = ecUpperCase
+    DataField = 'CONDPAGTO'
+    DataSource = dsCad
+    TabOrder = 6
+  end
+  object CodVendedor: TDBEdit
+    Left = 72
+    Top = 56
+    Width = 41
+    Height = 21
+    DataField = 'CODVENDEDOR'
+    DataSource = dsCad
+    TabOrder = 7
+    OnEnter = CodVendedorEnter
+    OnExit = CodVendedorExit
+  end
+  object DescVendedor: TEdit
+    Left = 120
+    Top = 56
+    Width = 385
+    Height = 21
+    CharCase = ecUpperCase
+    Color = clSilver
+    TabOrder = 8
+    OnExit = DescVendedorExit
+  end
+  object Grade: TDBGrid
+    Left = 8
+    Top = 80
+    Width = 689
+    Height = 193
+    DataSource = dsItens
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 9
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnDblClick = GradeDblClick
+    OnKeyDown = GradeKeyDown
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'NUMEXTINTOR'
+        Title.Caption = 'N'#186'Extintor'
+        Width = 53
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CAPACIDADE'
+        Title.Caption = 'Capacidade'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DESCLOCAL'
+        Title.Caption = 'Localiza'#231#227'o'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CODNIVEL'
+        Title.Caption = 'N'#237'vel'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'C_VENCTOTESTE'
+        Title.Caption = 'Reteste'
+        Width = 67
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VALORUNIT'
+        Title.Caption = 'Valor Unit.'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VALORTOTAL'
+        Title.Caption = 'Valor Total'
+        Visible = True
+      end>
+  end
+  object PercDesconto: TDBEdit
+    Left = 400
+    Top = 296
+    Width = 73
+    Height = 21
+    DataField = 'DESCONTO'
+    DataSource = dsCad
+    TabOrder = 10
+    OnExit = PercDescontoExit
+  end
+  object DBEdit8: TDBEdit
+    Left = 496
+    Top = 296
+    Width = 97
+    Height = 21
+    TabStop = False
+    DataField = 'TOTALBRUTO'
+    DataSource = dsCad
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 11
+  end
+  object DBEdit9: TDBEdit
+    Left = 600
+    Top = 296
+    Width = 97
+    Height = 21
+    TabStop = False
+    DataField = 'VALORPROPOSTA'
+    DataSource = dsCad
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 12
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 326
+    Width = 707
+    Height = 41
+    Align = alBottom
+    BevelOuter = bvLowered
+    TabOrder = 13
+    object butSalvar: TBitBtn
+      Left = 64
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = '&Salvar'
+      Enabled = False
+      TabOrder = 0
+      OnClick = butSalvarClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333FFFFFFFFFFFFF33000077777770033377777777777773F000007888888
+        00037F3337F3FF37F37F00000780088800037F3337F77F37F37F000007800888
+        00037F3337F77FF7F37F00000788888800037F3337777777337F000000000000
+        00037F3FFFFFFFFFFF7F00000000000000037F77777777777F7F000FFFFFFFFF
+        00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
+        00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
+        00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
+        0003737FFFFFFFFF7F7330099999999900333777777777777733}
+      NumGlyphs = 2
+    end
+    object butExc: TBitBtn
+      Left = 144
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = '&Excluir'
+      Enabled = False
+      TabOrder = 1
+      OnClick = butExcClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333000000000
+        3333333777777777F3333330F777777033333337F3F3F3F7F3333330F0808070
+        33333337F7F7F7F7F3333330F080707033333337F7F7F7F7F3333330F0808070
+        33333337F7F7F7F7F3333330F080707033333337F7F7F7F7F3333330F0808070
+        333333F7F7F7F7F7F3F33030F080707030333737F7F7F7F7F7333300F0808070
+        03333377F7F7F7F773333330F080707033333337F7F7F7F7F333333070707070
+        33333337F7F7F7F7FF3333000000000003333377777777777F33330F88877777
+        0333337FFFFFFFFF7F3333000000000003333377777777777333333330777033
+        3333333337FFF7F3333333333000003333333333377777333333}
+      NumGlyphs = 2
+    end
+    object butExcTudo: TBitBtn
+      Left = 224
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'Exc. &Tudo'
+      Enabled = False
+      TabOrder = 2
+      OnClick = butExcTudoClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333000000000
+        3333333777777777F3333330F777777033333337F3F3F3F7F3333330F0808070
+        33333337F7F7F7F7F3333330F080707033333337F7F7F7F7F3333330F0808070
+        33333337F7F7F7F7F3333330F080707033333337F7F7F7F7F3333330F0808070
+        333333F7F7F7F7F7F3F33030F080707030333737F7F7F7F7F7333300F0808070
+        03333377F7F7F7F773333330F080707033333337F7F7F7F7F333333070707070
+        33333337F7F7F7F7FF3333000000000003333377777777777F33330F88877777
+        0333337FFFFFFFFF7F3333000000000003333377777777777333333330777033
+        3333333337FFF7F3333333333000003333333333377777333333}
+      NumGlyphs = 2
+    end
+    object butPesq: TBitBtn
+      Left = 304
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = '&Pesquisar'
+      TabOrder = 3
+      OnClick = butPesqClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        33033333333333333F7F3333333333333000333333333333F777333333333333
+        000333333333333F777333333333333000333333333333F77733333333333300
+        033333333FFF3F777333333700073B703333333F7773F77733333307777700B3
+        33333377333777733333307F8F8F7033333337F333F337F3333377F8F9F8F773
+        3333373337F3373F3333078F898F870333337F33F7FFF37F333307F99999F703
+        33337F377777337F3333078F898F8703333373F337F33373333377F8F9F8F773
+        333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
+        333333773FF77333333333370007333333333333777333333333}
+      NumGlyphs = 2
+    end
+    object butImprimir: TBitBtn
+      Left = 384
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = '&Proposta'
+      Enabled = False
+      TabOrder = 4
+      OnClick = butImprimirClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00300000000000
+        00033FFFFFFFFFFFFFFF0888888888888880777777777777777F088888888888
+        8880777777777777777F0000000000000000FFFFFFFFFFFFFFFF0F8F8F8F8F8F
+        8F80777777777777777F08F8F8F8F8F8F9F0777777777777777F0F8F8F8F8F8F
+        8F807777777777777F7F0000000000000000777777777777777F3330FFFFFFFF
+        03333337F3FFFF3F7F333330F0000F0F03333337F77773737F333330FFFFFFFF
+        03333337F3FF3FFF7F333330F00F000003333337F773777773333330FFFF0FF0
+        33333337F3FF7F3733333330F08F0F0333333337F7737F7333333330FFFF0033
+        33333337FFFF7733333333300000033333333337777773333333}
+      NumGlyphs = 2
+    end
+    object butSair: TBitBtn
+      Left = 624
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = '&Fechar'
+      TabOrder = 7
+      OnClick = butSairClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00330000000000
+        03333377777777777F333301BBBBBBBB033333773F3333337F3333011BBBBBBB
+        0333337F73F333337F33330111BBBBBB0333337F373F33337F333301110BBBBB
+        0333337F337F33337F333301110BBBBB0333337F337F33337F333301110BBBBB
+        0333337F337F33337F333301110BBBBB0333337F337F33337F333301110BBBBB
+        0333337F337F33337F333301110BBBBB0333337F337FF3337F33330111B0BBBB
+        0333337F337733337F333301110BBBBB0333337F337F33337F333301110BBBBB
+        0333337F3F7F33337F333301E10BBBBB0333337F7F7F33337F333301EE0BBBBB
+        0333337F777FFFFF7F3333000000000003333377777777777333}
+      NumGlyphs = 2
+    end
+    object butExec: TBitBtn
+      Left = 544
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'E&xecu'#231#227'o'
+      Enabled = False
+      TabOrder = 6
+      OnClick = butExecClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00300000000000
+        00033FFFFFFFFFFFFFFF0888888888888880777777777777777F088888888888
+        8880777777777777777F0000000000000000FFFFFFFFFFFFFFFF0F8F8F8F8F8F
+        8F80777777777777777F08F8F8F8F8F8F9F0777777777777777F0F8F8F8F8F8F
+        8F807777777777777F7F0000000000000000777777777777777F3330FFFFFFFF
+        03333337F3FFFF3F7F333330F0000F0F03333337F77773737F333330FFFFFFFF
+        03333337F3FF3FFF7F333330F00F000003333337F773777773333330FFFF0FF0
+        33333337F3FF7F3733333330F08F0F0333333337F7737F7333333330FFFF0033
+        33333337FFFF7733333333300000033333333337777773333333}
+      NumGlyphs = 2
+    end
+    object butAnal: TBitBtn
+      Left = 464
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = '&Anal'#237'tica'
+      Enabled = False
+      TabOrder = 5
+      OnClick = butAnalClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00300000000000
+        00033FFFFFFFFFFFFFFF0888888888888880777777777777777F088888888888
+        8880777777777777777F0000000000000000FFFFFFFFFFFFFFFF0F8F8F8F8F8F
+        8F80777777777777777F08F8F8F8F8F8F9F0777777777777777F0F8F8F8F8F8F
+        8F807777777777777F7F0000000000000000777777777777777F3330FFFFFFFF
+        03333337F3FFFF3F7F333330F0000F0F03333337F77773737F333330FFFFFFFF
+        03333337F3FF3FFF7F333330F00F000003333337F773777773333330FFFF0FF0
+        33333337F3FF7F3733333330F08F0F0333333337F7737F7333333330FFFF0033
+        33333337FFFF7733333333300000033333333337777773333333}
+      NumGlyphs = 2
+    end
+  end
+  object dsCad: TDataSource
+    DataSet = DM.Proposta
+    OnStateChange = dsCadStateChange
+    Left = 280
+    Top = 136
+  end
+  object dsItens: TDataSource
+    DataSet = DM.ItensProposta
+    Left = 352
+    Top = 144
+  end
+  object Pesq: TSQLDataSet
+    SQLConnection = DmBanco.BancoDados
+    CommandText = 'select NOME from TPESSOA where CODPESSOA = :CODPESSOA'
+    Params = <
+      item
+        DataType = ftFloat
+        Name = 'CODPESSOA'
+        ParamType = ptInput
+      end>
+    Left = 544
+    Top = 144
+    object PesqNOME: TStringField
+      FieldName = 'NOME'
+      Size = 70
+    end
+  end
+  object PesqVend: TSQLDataSet
+    SQLConnection = DmBanco.BancoDados
+    CommandText = 
+      'select DESCVENDEDOR from TVENDEDO where CODVENDEDOR = :CODVENDED' +
+      'OR'
+    Params = <
+      item
+        DataType = ftFloat
+        Name = 'CODVENDEDOR'
+        ParamType = ptInput
+      end>
+    Left = 544
+    Top = 176
+    object PesqVendDESCVENDEDOR: TStringField
+      FieldName = 'DESCVENDEDOR'
+      Size = 30
+    end
+  end
+end

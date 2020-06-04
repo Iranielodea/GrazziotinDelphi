@@ -1,0 +1,89 @@
+unit URVencimento;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, FMTBcd, ppBands, ppClass, ppDB, ppDBPipe, DBClient, ppCtrls,
+  ppVar, ppPrnabl, ppCache, ppComm, ppRelatv, ppProd, ppReport, DB,
+  Provider, SqlExpr, ppViewr;
+
+type
+  TFrVencimento = class(TForm)
+    dspOrdem: TDataSetProvider;
+    dsOrdem: TDataSource;
+    RelOrdem: TppReport;
+    ppHeaderBand1: TppHeaderBand;
+    ppLabel1: TppLabel;
+    ppSystemVariable1: TppSystemVariable;
+    ppSystemVariable2: TppSystemVariable;
+    ppLabel2: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel4: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel6: TppLabel;
+    ppLabel7: TppLabel;
+    ppLine1: TppLine;
+    ppDetailBand1: TppDetailBand;
+    ppDBText2: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText5: TppDBText;
+    ppDBText3: TppDBText;
+    ppDBText9: TppDBText;
+    ppSummaryBand1: TppSummaryBand;
+    ppLine2: TppLine;
+    ppLabel10: TppLabel;
+    ppDBCalc1: TppDBCalc;
+    lblData: TppLabel;
+    ppDBText10: TppDBText;
+    Ordem: TClientDataSet;
+    ppLabel11: TppLabel;
+    ppDBText12: TppDBText;
+    dbOrdem: TppDBPipeline;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppLabel13: TppLabel;
+    ppDBText13: TppDBText;
+    ppLabel14: TppLabel;
+    ppDBText14: TppDBText;
+    ppLabel15: TppLabel;
+    ppDBText15: TppDBText;
+    ppLabel16: TppLabel;
+    ppDBText16: TppDBText;
+    ppLabel17: TppLabel;
+    ppDBText17: TppDBText;
+    ppDBText1: TppDBText;
+    ppLabel8: TppLabel;
+    ppDBCalc2: TppDBCalc;
+    dtOrdem: TSQLQuery;
+    lblVend: TppLabel;
+    ppLabel9: TppLabel;
+    ppDBText6: TppDBText;
+    ppLabel12: TppLabel;
+    ppDBText8: TppDBText;
+    ppLabel18: TppLabel;
+    ppDBText7: TppDBText;
+    procedure RelOrdemPreviewFormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrVencimento: TFrVencimento;
+
+implementation
+
+uses UDMBanco;
+
+{$R *.dfm}
+
+procedure TFrVencimento.RelOrdemPreviewFormCreate(Sender: TObject);
+begin
+   TPPReport(Sender).PreviewForm.WindowState:=wsMaximized;
+   TPPViewer(TPPReport(Sender).PreviewForm.Viewer).ZoomPercentage:=90;
+end;
+
+end.

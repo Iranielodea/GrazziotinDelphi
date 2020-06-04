@@ -1,0 +1,293 @@
+object fMenuPrin: TfMenuPrin
+  Left = 48
+  Top = 33
+  Width = 755
+  Height = 127
+  Caption = 'Menu Principal'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Menu = MainMenu1
+  OldCreateOrder = False
+  OnActivate = FormActivate
+  OnClick = FormClick
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Edit1: TEdit
+    Left = 344
+    Top = 27
+    Width = 65
+    Height = 21
+    CharCase = ecUpperCase
+    TabOrder = 1
+  end
+  object ToolBar1: TToolBar
+    Left = 0
+    Top = 0
+    Width = 747
+    Height = 49
+    ButtonHeight = 39
+    Caption = 'ToolBar1'
+    EdgeBorders = [ebTop, ebBottom]
+    TabOrder = 0
+    OnClick = ToolBar1Click
+    OnDblClick = ToolBar1DblClick
+    object butCliente: TSpeedButton
+      Left = 0
+      Top = 2
+      Width = 65
+      Height = 39
+      Caption = '&Pessoas'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033BBBBBBBBBB
+        BB33337777777777777F33BB00BBBBBBBB33337F77333333F37F33BB0BBBBBB0
+        BB33337F73F33337FF7F33BBB0BBBB000B33337F37FF3377737F33BBB00BB00B
+        BB33337F377F3773337F33BBBB0B00BBBB33337F337F7733337F33BBBB000BBB
+        BB33337F33777F33337F33EEEE000EEEEE33337F3F777FFF337F33EE0E80000E
+        EE33337F73F77773337F33EEE0800EEEEE33337F37377F33337F33EEEE000EEE
+        EE33337F33777F33337F33EEEEE00EEEEE33337F33377FF3337F33EEEEEE00EE
+        EE33337F333377F3337F33EEEEEE00EEEE33337F33337733337F33EEEEEEEEEE
+        EE33337FFFFFFFFFFF7F33EEEEEEEEEEEE333377777777777773}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+      OnClick = butClienteClick
+    end
+    object butCliExtintor: TSpeedButton
+      Left = 65
+      Top = 2
+      Width = 64
+      Height = 39
+      Caption = '&Clientes Ext.'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555550FF0559
+        1950555FF75F7557F7F757000FF055591903557775F75557F77570FFFF055559
+        1933575FF57F5557F7FF0F00FF05555919337F775F7F5557F7F700550F055559
+        193577557F7F55F7577F07550F0555999995755575755F7FFF7F5570F0755011
+        11155557F755F777777555000755033305555577755F75F77F55555555503335
+        0555555FF5F75F757F5555005503335505555577FF75F7557F55505050333555
+        05555757F75F75557F5505000333555505557F777FF755557F55000000355557
+        07557777777F55557F5555000005555707555577777FF5557F55553000075557
+        0755557F7777FFF5755555335000005555555577577777555555}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+      OnClick = butCliExtintorClick
+    end
+    object butServico: TSpeedButton
+      Left = 129
+      Top = 2
+      Width = 65
+      Height = 39
+      Caption = '&Servi'#231'os'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333300000000
+        0000333377777777777733330FFFFFFFFFF033337F3FFF3F3FF733330F000F0F
+        00F033337F777373773733330FFFFFFFFFF033337F3FF3FF3FF733330F00F00F
+        00F033337F773773773733330FFFFFFFFFF033337FF3333FF3F7333300FFFF00
+        F0F03333773FF377F7373330FB00F0F0FFF0333733773737F3F7330FB0BF0FB0
+        F0F0337337337337373730FBFBF0FB0FFFF037F333373373333730BFBF0FB0FF
+        FFF037F3337337333FF700FBFBFB0FFF000077F333337FF37777E0BFBFB000FF
+        0FF077FF3337773F7F37EE0BFB0BFB0F0F03777FF3733F737F73EEE0BFBF00FF
+        00337777FFFF77FF7733EEEE0000000003337777777777777333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+      OnClick = butServicoClick
+    end
+    object butSair: TSpeedButton
+      Left = 194
+      Top = 2
+      Width = 65
+      Height = 39
+      Caption = 'Sai&r'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00330000000000
+        03333377777777777F333301BBBBBBBB033333773F3333337F3333011BBBBBBB
+        0333337F73F333337F33330111BBBBBB0333337F373F33337F333301110BBBBB
+        0333337F337F33337F333301110BBBBB0333337F337F33337F333301110BBBBB
+        0333337F337F33337F333301110BBBBB0333337F337F33337F333301110BBBBB
+        0333337F337F33337F333301110BBBBB0333337F337FF3337F33330111B0BBBB
+        0333337F337733337F333301110BBBBB0333337F337F33337F333301110BBBBB
+        0333337F3F7F33337F333301E10BBBBB0333337F7F7F33337F333301EE0BBBBB
+        0333337F777FFFFF7F3333000000000003333377777777777333}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+      OnClick = butSairClick
+    end
+  end
+  object MainMenu1: TMainMenu
+    Left = 280
+    Top = 32
+    object Cadastros1: TMenuItem
+      Caption = '&Cadastros'
+      object Bairro1: TMenuItem
+        Caption = '&Bairros'
+        OnClick = Bairro1Click
+      end
+      object Cidade1: TMenuItem
+        Caption = '&Cidades'
+        OnClick = Cidade1Click
+      end
+      object Localizao1: TMenuItem
+        Caption = 'Localiza'#231#227'o'
+        OnClick = Localizao1Click
+      end
+      object AgenteExtintor1: TMenuItem
+        Caption = 'Agente Extintor'
+        OnClick = AgenteExtintor1Click
+      end
+      object MinhaEmpresa1: TMenuItem
+        Caption = 'Minha Empresa'
+        OnClick = MinhaEmpresa1Click
+      end
+      object Resultado: TMenuItem
+        Caption = '&Resultado Hidrost'#225'tico'
+        OnClick = ResultadoClick
+      end
+      object Manuteno1: TMenuItem
+        Caption = '&Manuten'#231#227'o'
+        OnClick = Manuteno1Click
+      end
+      object Marcas1: TMenuItem
+        Caption = 'Mar&cas'
+        OnClick = Marcas1Click
+      end
+      object Peas1: TMenuItem
+        Caption = '&Pe'#231'as'
+        OnClick = Peas1Click
+      end
+      object Observaes1: TMenuItem
+        Caption = '&Observa'#231#245'es'
+        OnClick = Observaes1Click
+      end
+      object Vendedores1: TMenuItem
+        Caption = '&Vendedores'
+        OnClick = Vendedores1Click
+      end
+      object Responsveis1: TMenuItem
+        Caption = '&Respons'#225'veis'
+        OnClick = Responsveis1Click
+      end
+      object PesquisadeSelos1: TMenuItem
+        Caption = 'Pesquisa de Selos'
+        OnClick = PesquisadeSelos1Click
+      end
+      object Propostas1: TMenuItem
+        Caption = 'Propostas'
+        OnClick = Propostas1Click
+      end
+      object abeladePreos1: TMenuItem
+        Caption = 'Tabela de Pre'#231'os'
+        OnClick = abeladePreos1Click
+      end
+      object Capacidades1: TMenuItem
+        Caption = 'Capacidades'
+        OnClick = Capacidades1Click
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object Usuarios1: TMenuItem
+        Caption = 'Usu'#225'rios'
+        object CadSenha: TMenuItem
+          Caption = 'Cadastro'
+          OnClick = CadSenhaClick
+        end
+        object AlterarSenha1: TMenuItem
+          Caption = 'Alterar Senha'
+          OnClick = AlterarSenha1Click
+        end
+      end
+      object TabelaControle: TMenuItem
+        Caption = 'Tabela de Controle'
+        OnClick = TabelaControleClick
+      end
+      object TrocaDeSelo: TMenuItem
+        Caption = 'Troca de Selo'
+        OnClick = TrocaDeSeloClick
+      end
+      object IntervalodeSelos1: TMenuItem
+        Caption = 'Intervalo de Selos'
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object Sair1: TMenuItem
+        Caption = 'Sair'
+        OnClick = Sair1Click
+      end
+    end
+    object Estoque1: TMenuItem
+      Caption = '&Estoque'
+      object CadastrodeLotes1: TMenuItem
+        Caption = 'Cadastro de &Lotes'
+        OnClick = CadastrodeLotes1Click
+      end
+      object ExtratodeEstoque1: TMenuItem
+        Caption = 'Extrato do Estoque'
+        OnClick = ExtratodeEstoque1Click
+      end
+      object Compra1: TMenuItem
+        Caption = 'Compra'
+        OnClick = Compra1Click
+      end
+      object Movimento_Manual: TMenuItem
+        Caption = 'Movimento Manual do Estoque'
+        OnClick = Movimento_ManualClick
+      end
+    end
+    object Relatorios1: TMenuItem
+      Caption = '&Relat'#243'rios'
+      object RelatrioparaClientes: TMenuItem
+        Caption = 'Relat'#243'rio para Clientes'
+        OnClick = RelatrioparaClientesClick
+      end
+      object RelatriodeSelos1: TMenuItem
+        Caption = 'Relat'#243'rio de Selos'
+        object PorOrdemdeServico1: TMenuItem
+          Caption = 'Por Ordem de Servico'
+          OnClick = PorOrdemdeServico1Click
+        end
+      end
+      object RelatriodeVencimentodeExtintores1: TMenuItem
+        Caption = 'Relat'#243'rio de Vencimento de Extintores'
+        OnClick = RelatriodeVencimentodeExtintores1Click
+      end
+      object RelatriodeServios1: TMenuItem
+        Caption = 'Relat'#243'rio de Servi'#231'os'
+        OnClick = RelatriodeServios1Click
+      end
+      object RelatriodeLotes1: TMenuItem
+        Caption = 'Relat'#243'rio de Lotes'
+        OnClick = RelatriodeLotes1Click
+      end
+      object RastreamentodoPQumico1: TMenuItem
+        Caption = 'Rastreamento do P'#243' Qu'#237'mico'
+        OnClick = RastreamentodoPQumico1Click
+      end
+      object N3: TMenuItem
+        Caption = '-'
+      end
+      object ConfRelatrios1: TMenuItem
+        Caption = 'Conf.Relat'#243'rios'
+        OnClick = ConfRelatrios1Click
+      end
+    end
+  end
+end

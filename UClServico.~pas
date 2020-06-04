@@ -1,0 +1,74 @@
+unit UClServico;
+
+interface
+
+uses sysUtils,  SqlExpr;
+
+Type
+   TServico = Class
+   private
+      fVenctoCarga:  String;
+      fVencimento:   String;
+      fAnoFab:       String;
+      fSituacao:     String;
+      fCodMarca:     String;
+      fCapacidade:   String;
+      fDataCarga:    String;
+      fConservacao:  String;
+      fSelo:         String;
+      fNumero:       String;
+      fCodProjeto:   String;
+      fCodCapacidade:String;
+      fPeso:         String;
+      fTipo:         String;
+      fLoteResumido: String;
+      fChave:        String;
+   public
+      procedure GravaExtintor;
+      property VenctoCarga: String  read fVenctoCarga write fVenctoCarga;
+      property Vencimento: String  read fVencimento write fVencimento;
+      property AnoFab: String  read fAnoFab write fVencimento;
+      property Situacao: String  read fSituacao write fSituacao;
+      property CodMarca: String  read fCodMarca write fCodMarca;
+      property Capacidade: String  read fCapacidade write fCapacidade;
+      property fDataCarga: String  read fDataCarga write fDataCarga;
+      property fConservacao: String  read fConservacao write fConservacao;
+      property fSelo: String  read fSelo write fSelo;
+      property fNumero: String  read fNumero write fNumero;
+      property fCodProjeto: String  read fCodProjeto write fCodProjeto;
+      property fCodCapacidade: String  read fCodCapacidade write fCodCapacidade;
+      property fPeso: String  read fPeso write fPeso;
+      property fTipo: String  read fTipo write fTipo;
+      property fLoteResumido: String  read fLoteResumido write fLoteResumido;
+      property fChave: String  read fChave write fChave;
+   end;
+implementation
+
+uses UDMBanco, UUtil;
+
+{ TServico }
+
+procedure TServico.GravaExtintor;
+begin
+   dmBanco.BancoDados.ExecuteDirect(
+      ' update TCLIEXT set'
+      +' VENCTOCARGA = '+DataIngles(fVenctoCarga)
+      +',VENCIMENTO = '+DataIngles(fVencimento)
+      +',ANOFAB = '+DataIngles(fAnoFab)
+      +',SITUACAO = '''+fSituacao + ''''
+      +',CODMARCA = '+fCodMarca
+      +',CAPACIDADE = '''+fCapacidade+''''
+      +',DATACARGA = '+DataIngles(fDataCarga)
+      +',CONSERVACAO = '''+fConservacao+''''
+      +',SELO = '+fSelo
+      +',NUMERO = '+fSelo
+      +',CODPROJETO = '''+fCodProjeto+''''
+      +',CODCAPACIDADE = '+fCodCapacidade
+      +',PESO = '+fPeso
+      +',TIPO = '''+fTipo+''''
+      +',LOTERESUMIDO = '''+fLoteResumido+''''
+      +' where CONTROLE = '+fChave
+   )
+end;
+
+end.

@@ -1,0 +1,451 @@
+unit UOrdem;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DBCtrls, Mask, FMTBcd, Grids, DBGrids, DB, SqlExpr,
+  Buttons, ExtCtrls;
+
+type
+  TfOrdem = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    NumOrdem: TMaskEdit;
+    CodPessoa: TDBEdit;
+    Nome: TEdit;
+    Data: TDBEdit;
+    Pesq: TSQLQuery;
+    PesqNOME: TStringField;
+    dsCad: TDataSource;
+    dsItens: TDataSource;
+    Grade: TDBGrid;
+    Panel1: TPanel;
+    butExc: TBitBtn;
+    butSalvar: TBitBtn;
+    butSair: TBitBtn;
+    butPesq: TBitBtn;
+    butExcTudo: TBitBtn;
+    butImprimir: TBitBtn;
+    butPessoa: TSpeedButton;
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure NumOrdemEnter(Sender: TObject);
+    procedure NumOrdemExit(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure dsCadStateChange(Sender: TObject);
+    procedure CodPessoaExit(Sender: TObject);
+    procedure NomeExit(Sender: TObject);
+    procedure GradeDblClick(Sender: TObject);
+    procedure GradeEnter(Sender: TObject);
+    procedure GradeExit(Sender: TObject);
+    procedure GradeKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure CodPessoaEnter(Sender: TObject);
+    procedure NomeEnter(Sender: TObject);
+    procedure butPessoaClick(Sender: TObject);
+    procedure butExcClick(Sender: TObject);
+    procedure butExcTudoClick(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
+    procedure butSalvarClick(Sender: TObject);
+    procedure butSairClick(Sender: TObject);
+    procedure butPesqClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure pesquisaPessoa(Tipo: string);
+    procedure BloqueiaPessoa(inTipo: boolean);
+  public
+    { Public declarations }
+  end;
+
+var
+  fOrdem: TfOrdem;
+
+implementation
+
+uses UUtil, UDMBanco, UDM, UPessoa, UItensOrdem, UROrdemServico, UJOrdem,
+  UUtilServico;
+
+{$R *.dfm}
+
+procedure TfOrdem.pesquisaPessoa(Tipo: string);
+begin
+   if (CodPessoa.Modified) or (Nome.Modified) then
+   begin
+      if Tipo = 'C' then
+         ComandoQuery(dm.Qsql,'select CODPESSOA,NOME from TPESSOA where CODPESSOA = '+CodPessoa.Text)
+      else
+         ComandoQuery(dm.Qsql,'select CODPESSOA,NOME from TPESSOA where NOME like "'+Nome.Text+'%" order by NOME');
+      if dm.Qsql.RecordCount = 0 then
+      begin
+         dm.OrdemCodPessoa.Clear;
+         Nome.Clear;
+      end;
+      if dm.Qsql.RecordCount = 1 then
+      begin
+         dm.OrdemCodPessoa.Text:=dm.Qsql.fieldbyname('CODPESSOA').Text;
+         NOME.Text:=dm.Qsql.fieldbyname('NOME').Text;
+      end;
+      if dm.Qsql.RecordCount > 1 then
+      begin
+         procura(dm.Pessoa,Nome.Text+'%');
+         vgcodigo:='';
+         fPessoa:=TfPessoa.create(Self);
+         fPessoa.butConf.Visible:=true;
+         fPessoa.showModal;
+         if vgcodigo <> '' then
+         begin
+            ComandoQuery(dm.Qsql,'select NOME from TPESSOA where CODPESSOA = '+vgcodigo);
+            dm.OrdemCodPessoa.Text:=vgcodigo;
+            NOME.Text:=dm.Qsql.fieldbyname('NOME').Text;
+            Nome.SetFocus;
+         end
+         else begin
+            dm.OrdemCodPessoa.Clear;
+            Nome.clear;
+         end;
+      end;
+      dm.Qsql.Close;
+   end;
+end;
+
+procedure TfOrdem.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+   if key = #13 then
+   begin
+      key:=#0;
+      perform(Wm_NextDlgCtl,0,0);
+   end;
+end;
+
+procedure TfOrdem.NumOrdemEnter(Sender: TObject);
+begin
+   if dm.Ordem.State in [dsedit,dsinsert] then
+      dm.Ordem.Cancel;
+   dm.Ordem.Close;
+   dm.ItensOrdem.Close;
+   LimpaTela(fordem);
+   procura(dm.Control,'Ordem');
+   NUMORDEM.Text:=dm.ControlCODIGO.Text;
+   dm.Control.close;
+   BloqueiaPessoa(False);
+   NumOrdem.SelectAll;
+end;
+
+procedure TfOrdem.NumOrdemExit(Sender: TObject);
+begin
+   procura(dm.Ordem,NumOrdem.Text);
+   if dm.Ordem.IsEmpty then
+   begin
+      dm.Ordem.Append;
+      dm.OrdemNUMORDEM.Text:=NumOrdem.Text;
+      dm.OrdemDATAORDEM.AsDateTime:=date;
+      BloqueiaPessoa(False);
+   end
+   else begin
+      Pesq.Close;
+      Pesq.Params[0].Text:=codpessoa.Text;
+      Pesq.Open;
+      Nome.Text:=PesqNOME.Text;
+      Pesq.Close;
+      dm.Ordem.Edit;
+      BloqueiaPessoa(True);
+   end;
+   procura(dm.ItensOrdem,NumOrdem.Text);
+   NumOrdem.Enabled:=false;
+end;
+
+procedure TfOrdem.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if key = vk_escape then
+   begin
+      if NumOrdem.Focused then
+         close
+      else
+      begin
+         NumOrdem.Enabled:=true;
+         NumOrdem.SetFocus;
+      end;
+   end;
+end;
+
+procedure TfOrdem.dsCadStateChange(Sender: TObject);
+begin
+   //butPesq.Enabled:=dsCad.State in [dsBrowse,dsInactive];
+   butExc.Enabled:=dsCad.State in [dsBrowse,dsEdit];
+   butImprimir.Enabled:=dsCad.State in [dsBrowse,dsEdit];
+   butExcTudo.Enabled:=dsCad.State in [dsBrowse,dsEdit];
+   butSalvar.Enabled:=dsCad.State in [dsedit,dsinsert];
+end;
+
+procedure TfOrdem.CodPessoaExit(Sender: TObject);
+begin
+   if CodPessoa.Modified = false then exit;
+   if CodPessoa.Text <> '' then
+      PesquisaPessoa('C')
+   else
+      Nome.Clear;
+end;
+
+procedure TfOrdem.NomeExit(Sender: TObject);
+begin
+   if Nome.Modified = false then exit;
+   if Nome.Text <> '' then
+      PesquisaPessoa('D')
+   else
+      Codpessoa.Clear;
+end;
+
+procedure TfOrdem.GradeDblClick(Sender: TObject);
+begin
+   if trim(NumOrdem.text) = '' then
+   begin
+      mensagem('informe o Número da Ordem');
+      exit;
+   end;
+
+   if trim(CodPessoa.text) = '' then
+   begin
+      mensagem('informe o Cliente');
+      exit;
+   end;
+
+   if trim(Data.text) = '' then
+   begin
+      mensagem('informe a Data');
+      exit;
+   end;
+
+   fItensOrdem:=TfItensOrdem.create(Self);
+   fItensOrdem.show;
+
+   BloqueiaPessoa(True);
+end;
+
+procedure TfOrdem.GradeEnter(Sender: TObject);
+begin
+   fOrdem.KeyPreview:=false;
+end;
+
+procedure TfOrdem.GradeExit(Sender: TObject);
+begin
+   fOrdem.KeyPreview:=true;
+end;
+
+procedure TfOrdem.GradeKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if key = vk_escape then
+   begin
+      if NumOrdem.Focused then
+         close
+      else
+      begin
+         NumOrdem.Enabled:=true;
+         NumOrdem.SetFocus;
+      end;
+   end;
+
+   if key = vk_Return then
+   begin
+      GradeDblClick(Sender);
+      if dsItens.DataSet.IsEmpty then
+         fItensOrdem.Serie.SetFocus;
+   end;
+end;
+
+procedure TfOrdem.CodPessoaEnter(Sender: TObject);
+begin
+   CodPessoa.Modified:=false;
+end;
+
+procedure TfOrdem.NomeEnter(Sender: TObject);
+begin
+   Nome.Modified:=false;
+end;
+
+procedure TfOrdem.butPessoaClick(Sender: TObject);
+begin
+   procura(dm.Pessoa,'ABCDE%');
+   vgcodigo:='';
+   fPessoa:=TfPessoa.create(Self);
+   fPessoa.butConf.Visible:=true;
+   fPessoa.showModal;
+   if vgcodigo <> '' then
+   begin
+      ComandoQuery(dm.Qsql,'select NOME from TPESSOA where CODPESSOA = '+vgcodigo);
+      dm.OrdemCODPESSOA.Text:=vgcodigo;
+      NOME.Text:=dm.Qsql.fieldbyname('NOME').Text;
+      Nome.SetFocus;
+   end;
+end;
+
+procedure TfOrdem.butExcClick(Sender: TObject);
+var vqtde: string[20];
+begin
+   if dm.ItensOrdem.IsEmpty then
+      exit;
+   if dm.ItensOrdem.RecordCount = 1 then
+   begin
+      mensagem('Clique em Excluir Tudo');
+      exit;
+   end;
+   if confirma('Confirma a exclusão deste Ítem','N') = idNo then
+      exit;
+   try
+      dm.IniTrans;
+      if not (dm.Ordem.State = dsInsert) then
+      begin
+         vqtde:=cval(dm.ItensOrdemQTDE.AsString);
+         dmBanco.BancoDados.ExecuteDirect('update TESTLOTE set QTDEESTOQUE = QTDEESTOQUE + '+vqtde+' where LOTERESUMIDO = "'+dm.ItensOrdemLOTERESUMIDO.text+'"');
+      end;
+      dmBanco.BancoDados.ExecuteDirect('delete from TTABPECA where NUMSERVICO = '+NumOrdem.Text+' and SERIE = "'+dm.ItensOrdemSERIE.Text+'"');
+
+      fUtilServico:=TfUtilServico.Create(nil);
+      fUtilServico.UltimoCilindro(CodPessoa.Text,dm.ItensOrdemSERIE.Text,NumOrdem.Text);
+      fUtilServico.Free;
+
+      dm.ItensOrdem.Delete;
+      GravaTab(dm.ItensOrdem);
+      dm.GravaTrans;
+      except begin
+         mensagem('Exclusão Cancelada');
+         dm.CancelaTrans;
+      end;
+   end;
+end;
+
+procedure TfOrdem.butExcTudoClick(Sender: TObject);
+var vqtde: string[20];
+begin
+   if dm.ItensOrdem.IsEmpty then
+      exit;
+   if confirma('Confirma a exclusão de Toda Ordem','N') = idNo then
+      exit;
+   if confirma('Tem Certeza','N') = idNo then
+      exit;
+   try
+      fUtilServico:=TfUtilServico.Create(nil);
+      dm.IniTrans;
+      dm.ItensOrdem.First;
+      while not dm.ItensOrdem.Eof do
+      begin
+         vqtde:=cval(dm.ItensOrdemQTDE.AsString);
+         dmBanco.BancoDados.ExecuteDirect('update TESTLOTE set QTDEESTOQUE = QTDEESTOQUE + '+vqtde+' where LOTERESUMIDO = "'+dm.ItensOrdemLOTERESUMIDO.text+'"');
+
+         fUtilServico.UltimoCilindro(CodPessoa.Text,dm.ItensOrdemSERIE.Text,NumOrdem.Text);
+
+         dm.ItensOrdem.Delete;
+      end;
+      fUtilServico.Free;
+
+      dmBanco.BancoDados.ExecuteDirect('delete from TTABPECA where NUMSERVICO = '+NumOrdem.Text);
+      dm.Ordem.delete;
+      GravaTab(dm.ItensOrdem);
+      GravaTab(dm.Ordem);
+      dm.GravaTrans;
+      NumOrdem.Enabled:=true;
+      NumOrdem.SetFocus;
+      except begin
+         mensagem('Exclusão Cancelada');
+         dm.CancelaTrans;
+      end;
+   end;
+end;
+
+procedure TfOrdem.butImprimirClick(Sender: TObject);
+begin
+   if dsCad.State in [dsedit,dsinsert] then
+      dsCad.DataSet.Cancel;
+   if dsCad.DataSet.IsEmpty then
+   begin
+      mensagem('Não há ítens');
+      exit;
+   end;
+   frOrdemServico1:=TfrOrdemServico1.create(Self);
+   frOrdemServico1.Ordem.close;
+   frOrdemServico1.Ordem.params[0].text:=NumOrdem.Text;
+   frOrdemServico1.Ordem.open;
+
+   frOrdemServico1.Itens.Close;
+   frOrdemServico1.dtItens.Params[0].Text:=NumOrdem.Text;
+   frOrdemServico1.Itens.Open;
+   frOrdemServico1.ImprimePecas;
+
+
+   frOrdemServico1.agente.close;
+   frOrdemServico1.agente.open;
+
+   frOrdemServico1.Relatorio.Print;
+   frOrdemServico1.Ordem.Close;
+   frOrdemServico1.Itens.Close;
+   frOrdemServico1.free;
+end;
+
+procedure TfOrdem.butSalvarClick(Sender: TObject);
+begin
+   if dm.ItensOrdem.IsEmpty then
+      exit;
+   if dm.Ordem.State in [dsedit,dsinsert] then
+   begin
+      try
+         dm.IniTrans;
+         dm.ItensOrdem.DisableControls;
+         dm.ItensOrdem.First;
+         while not dm.ItensOrdem.Eof do
+         begin
+            if dm.ItensOrdemCODPESSOA.Text <> dm.OrdemCODPESSOA.Text then
+            begin
+               dm.ItensOrdem.Edit;
+               dm.ItensOrdemCODPESSOA.Text:=dm.OrdemCODPESSOA.Text;
+               dm.ItensOrdem.Post;
+            end;
+            dm.ItensOrdem.Next;
+         end;
+         dm.ItensOrdem.First;
+         dm.ItensOrdem.EnableControls;
+         GravaTab(dm.ItensOrdem);
+         GravaTab(dm.Ordem);
+         dm.GravaTrans;
+         except begin
+            mensagem('Exclusão Cancelada');
+            dm.CancelaTrans;
+         end;
+      end;
+   end;
+end;
+
+procedure TfOrdem.butSairClick(Sender: TObject);
+begin
+   close;
+end;
+
+procedure TfOrdem.butPesqClick(Sender: TObject);
+begin
+   if dsCad.State in [dsedit,dsinsert] then
+      dsCad.DataSet.Cancel;
+   fJOrdem:=TfJOrdem.create(Self);
+   if fJOrdem.showModal = mrOk then
+   begin
+      if not fjOrdem.Pesq.IsEmpty then
+      begin
+         NumOrdem.Text:=fjOrdem.PesqNUMORDEM.text;
+         NumOrdem.Modified:=true;
+         NumOrdemExit(Self);
+         Codpessoa.setfocus;
+      end;
+   end;
+   fjOrdem.Pesq.close;
+   fJOrdem.free;
+end;
+
+procedure TfOrdem.BloqueiaPessoa(inTipo: boolean);
+begin
+   CodPessoa.Enabled := not (inTipo);
+   Nome.Enabled := not (inTipo);
+   butPessoa.Enabled := not (inTipo);
+end;
+
+end.

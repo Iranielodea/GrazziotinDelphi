@@ -1,0 +1,818 @@
+object FrVencimento: TFrVencimento
+  Left = 192
+  Top = 114
+  Width = 254
+  Height = 148
+  Caption = 'FrVencimento'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object dspOrdem: TDataSetProvider
+    DataSet = dtOrdem
+    Constraints = True
+    Left = 48
+    Top = 16
+  end
+  object dsOrdem: TDataSource
+    DataSet = Ordem
+    Left = 112
+    Top = 16
+  end
+  object RelOrdem: TppReport
+    AutoStop = False
+    PassSetting = psTwoPass
+    PrinterSetup.BinName = 'Default'
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.mmMarginBottom = 6350
+    PrinterSetup.mmMarginLeft = 6350
+    PrinterSetup.mmMarginRight = 6350
+    PrinterSetup.mmMarginTop = 6350
+    PrinterSetup.mmPaperHeight = 297000
+    PrinterSetup.mmPaperWidth = 210000
+    PrinterSetup.PaperSize = 9
+    DeviceType = 'Screen'
+    OnPreviewFormCreate = RelOrdemPreviewFormCreate
+    Left = 176
+    Top = 16
+    Version = '6.0'
+    mmColumnWidth = 0
+    DataPipelineName = 'dbOrdem'
+    object ppHeaderBand1: TppHeaderBand
+      mmBottomOffset = 0
+      mmHeight = 18521
+      mmPrintPosition = 0
+      object ppLabel1: TppLabel
+        UserName = 'Label1'
+        AutoSize = False
+        Caption = 'Relat'#243'rio de Vencimento de Extintores'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = [fsBold]
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 5027
+        mmLeft = 33867
+        mmTop = 0
+        mmWidth = 136261
+        BandType = 0
+      end
+      object ppSystemVariable1: TppSystemVariable
+        UserName = 'SystemVariable1'
+        VarType = vtPageSetDesc
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 171450
+        mmTop = 0
+        mmWidth = 20108
+        BandType = 0
+      end
+      object ppSystemVariable2: TppSystemVariable
+        UserName = 'SystemVariable2'
+        VarType = vtDateTime
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 0
+        mmTop = 0
+        mmWidth = 29633
+        BandType = 0
+      end
+      object ppLabel2: TppLabel
+        UserName = 'Label2'
+        Caption = 'Vencto Carga'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 0
+        mmTop = 14817
+        mmWidth = 17198
+        BandType = 0
+      end
+      object ppLabel4: TppLabel
+        UserName = 'Label4'
+        Caption = 'S'#233'rie'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 84667
+        mmTop = 14817
+        mmWidth = 6615
+        BandType = 0
+      end
+      object ppLabel5: TppLabel
+        UserName = 'Label5'
+        Caption = 'Localiza'#231#227'o'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 107950
+        mmTop = 14817
+        mmWidth = 14817
+        BandType = 0
+      end
+      object ppLabel6: TppLabel
+        UserName = 'Label6'
+        Caption = 'Capac.'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 38100
+        mmTop = 14817
+        mmWidth = 8996
+        BandType = 0
+      end
+      object ppLabel7: TppLabel
+        UserName = 'Label7'
+        Caption = 'N'#250'mero'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 152400
+        mmTop = 14817
+        mmWidth = 10054
+        BandType = 0
+      end
+      object ppLine1: TppLine
+        UserName = 'Line1'
+        Position = lpBottom
+        Weight = 0.75
+        mmHeight = 1588
+        mmLeft = 0
+        mmTop = 16933
+        mmWidth = 197380
+        BandType = 0
+      end
+      object lblData: TppLabel
+        UserName = 'lblData'
+        AutoSize = False
+        Caption = 'lblData'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3440
+        mmLeft = 33867
+        mmTop = 5292
+        mmWidth = 136261
+        BandType = 0
+      end
+      object ppLabel11: TppLabel
+        UserName = 'Label11'
+        Caption = 'Vencto Teste'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 19050
+        mmTop = 14817
+        mmWidth = 16669
+        BandType = 0
+      end
+      object lblVend: TppLabel
+        UserName = 'lblVend'
+        AutoSize = False
+        Caption = 'lblVend'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 33867
+        mmTop = 8996
+        mmWidth = 136261
+        BandType = 0
+      end
+      object ppLabel9: TppLabel
+        UserName = 'Label9'
+        Caption = 'Ano Fab.'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 52917
+        mmTop = 14817
+        mmWidth = 11642
+        BandType = 0
+      end
+      object ppLabel12: TppLabel
+        UserName = 'Label12'
+        Caption = 'Marca'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 67733
+        mmTop = 14817
+        mmWidth = 7938
+        BandType = 0
+      end
+    end
+    object ppDetailBand1: TppDetailBand
+      mmBottomOffset = 0
+      mmHeight = 3440
+      mmPrintPosition = 0
+      object ppDBText4: TppDBText
+        UserName = 'DBText4'
+        DataField = 'SERIE'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Courier New'
+        Font.Size = 9
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbOrdem'
+        mmHeight = 3440
+        mmLeft = 84667
+        mmTop = 0
+        mmWidth = 19579
+        BandType = 4
+      end
+      object ppDBText5: TppDBText
+        UserName = 'DBText5'
+        DataField = 'CAPACIDADE'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Courier New'
+        Font.Size = 9
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbOrdem'
+        mmHeight = 3440
+        mmLeft = 31750
+        mmTop = 0
+        mmWidth = 18785
+        BandType = 4
+      end
+      object ppDBText9: TppDBText
+        UserName = 'DBText9'
+        DataField = 'NUMERO'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Courier New'
+        Font.Size = 9
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbOrdem'
+        mmHeight = 3440
+        mmLeft = 154517
+        mmTop = 0
+        mmWidth = 8467
+        BandType = 4
+      end
+      object ppDBText10: TppDBText
+        UserName = 'DBText10'
+        DataField = 'VENCTCARGA'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Courier New'
+        Font.Size = 9
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbOrdem'
+        mmHeight = 3440
+        mmLeft = 0
+        mmTop = 0
+        mmWidth = 15081
+        BandType = 4
+      end
+      object ppDBText12: TppDBText
+        UserName = 'DBText12'
+        DataField = 'VENCTOTESTE'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Courier New'
+        Font.Size = 9
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbOrdem'
+        mmHeight = 3440
+        mmLeft = 16933
+        mmTop = 0
+        mmWidth = 13758
+        BandType = 4
+      end
+      object ppDBText1: TppDBText
+        UserName = 'DBText1'
+        DataField = 'DESCLOCAL'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Courier New'
+        Font.Size = 9
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbOrdem'
+        mmHeight = 3440
+        mmLeft = 105834
+        mmTop = 0
+        mmWidth = 46831
+        BandType = 4
+      end
+      object ppDBText6: TppDBText
+        UserName = 'DBText6'
+        DataField = 'ANOFAB'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 7
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbOrdem'
+        mmHeight = 3175
+        mmLeft = 50800
+        mmTop = 0
+        mmWidth = 7938
+        BandType = 4
+      end
+      object ppDBText8: TppDBText
+        UserName = 'DBText8'
+        DataField = 'DESCMARCA'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 7
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbOrdem'
+        mmHeight = 3175
+        mmLeft = 59267
+        mmTop = 0
+        mmWidth = 24077
+        BandType = 4
+      end
+    end
+    object ppSummaryBand1: TppSummaryBand
+      mmBottomOffset = 0
+      mmHeight = 7144
+      mmPrintPosition = 0
+      object ppLabel10: TppLabel
+        UserName = 'Label10'
+        Caption = 'Total Geral'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 0
+        mmTop = 1588
+        mmWidth = 13758
+        BandType = 7
+      end
+      object ppDBCalc1: TppDBCalc
+        UserName = 'DBCalc1'
+        DataField = 'CODPESSOA'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        DBCalcType = dcCount
+        DataPipelineName = 'dbOrdem'
+        mmHeight = 3175
+        mmLeft = 16933
+        mmTop = 1588
+        mmWidth = 17198
+        BandType = 7
+      end
+    end
+    object ppGroup1: TppGroup
+      BreakName = 'CODPESSOA'
+      DataPipeline = dbOrdem
+      UserName = 'Group1'
+      mmNewColumnThreshold = 0
+      mmNewPageThreshold = 0
+      DataPipelineName = 'dbOrdem'
+      object ppGroupHeaderBand1: TppGroupHeaderBand
+        mmBottomOffset = 0
+        mmHeight = 14288
+        mmPrintPosition = 0
+        object ppLabel3: TppLabel
+          UserName = 'Label3'
+          Caption = 'Cliente'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 8
+          Font.Style = []
+          Transparent = True
+          mmHeight = 3175
+          mmLeft = 0
+          mmTop = 794
+          mmWidth = 8467
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppDBText2: TppDBText
+          UserName = 'DBText2'
+          DataField = 'CODPESSOA'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Courier New'
+          Font.Size = 9
+          Font.Style = []
+          TextAlignment = taRightJustified
+          Transparent = True
+          DataPipelineName = 'dbOrdem'
+          mmHeight = 3440
+          mmLeft = 14817
+          mmTop = 529
+          mmWidth = 10319
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppDBText3: TppDBText
+          UserName = 'DBText3'
+          DataField = 'NOME'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Courier New'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'dbOrdem'
+          mmHeight = 3440
+          mmLeft = 27517
+          mmTop = 529
+          mmWidth = 110861
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppLabel13: TppLabel
+          UserName = 'Label13'
+          Caption = 'Fone1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 8
+          Font.Style = []
+          Transparent = True
+          mmHeight = 3175
+          mmLeft = 0
+          mmTop = 9260
+          mmWidth = 7673
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppDBText13: TppDBText
+          UserName = 'DBText13'
+          DataField = 'FONE1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Courier New'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'dbOrdem'
+          mmHeight = 3440
+          mmLeft = 14817
+          mmTop = 9260
+          mmWidth = 33338
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppLabel14: TppLabel
+          UserName = 'Label14'
+          Caption = 'Contato'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 8
+          Font.Style = []
+          Transparent = True
+          mmHeight = 3175
+          mmLeft = 152400
+          mmTop = 794
+          mmWidth = 9790
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppDBText14: TppDBText
+          UserName = 'DBText14'
+          DataField = 'CONTATO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Courier New'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'dbOrdem'
+          mmHeight = 3440
+          mmLeft = 162984
+          mmTop = 529
+          mmWidth = 28575
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppLabel15: TppLabel
+          UserName = 'Label15'
+          Caption = 'Endere'#231'o'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 8
+          Font.Style = []
+          Transparent = True
+          mmHeight = 3175
+          mmLeft = 0
+          mmTop = 5027
+          mmWidth = 12171
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppDBText15: TppDBText
+          UserName = 'DBText15'
+          DataField = 'RUA'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 8
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'dbOrdem'
+          mmHeight = 3175
+          mmLeft = 14817
+          mmTop = 5027
+          mmWidth = 79111
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppLabel16: TppLabel
+          UserName = 'Label16'
+          Caption = 'Bairro'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 8
+          Font.Style = []
+          Transparent = True
+          mmHeight = 3175
+          mmLeft = 95250
+          mmTop = 5027
+          mmWidth = 7408
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppDBText16: TppDBText
+          UserName = 'DBText16'
+          DataField = 'DESCBAIRRO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Courier New'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'dbOrdem'
+          mmHeight = 3440
+          mmLeft = 103717
+          mmTop = 5027
+          mmWidth = 34396
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppLabel17: TppLabel
+          UserName = 'Label17'
+          Caption = 'Cidade'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 8
+          Font.Style = []
+          Transparent = True
+          mmHeight = 3175
+          mmLeft = 139700
+          mmTop = 5027
+          mmWidth = 8731
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppDBText17: TppDBText
+          UserName = 'DBText17'
+          DataField = 'DESCCIDADE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Courier New'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'dbOrdem'
+          mmHeight = 3440
+          mmLeft = 150284
+          mmTop = 5027
+          mmWidth = 41010
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppLabel18: TppLabel
+          UserName = 'Label18'
+          Caption = 'Fone2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 8
+          Font.Style = []
+          Transparent = True
+          mmHeight = 3175
+          mmLeft = 52917
+          mmTop = 9260
+          mmWidth = 7673
+          BandType = 3
+          GroupNo = 0
+        end
+        object ppDBText7: TppDBText
+          UserName = 'DBText7'
+          DataField = 'FONE2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Courier New'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'dbOrdem'
+          mmHeight = 3440
+          mmLeft = 63500
+          mmTop = 9260
+          mmWidth = 33338
+          BandType = 3
+          GroupNo = 0
+        end
+      end
+      object ppGroupFooterBand1: TppGroupFooterBand
+        mmBottomOffset = 0
+        mmHeight = 7938
+        mmPrintPosition = 0
+        object ppLabel8: TppLabel
+          UserName = 'Label8'
+          Caption = 'Total'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 8
+          Font.Style = []
+          Transparent = True
+          mmHeight = 3175
+          mmLeft = 0
+          mmTop = 2381
+          mmWidth = 6085
+          BandType = 5
+          GroupNo = 0
+        end
+        object ppDBCalc2: TppDBCalc
+          UserName = 'DBCalc2'
+          DataField = 'CODPESSOA'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Courier New'
+          Font.Size = 9
+          Font.Style = []
+          ResetGroup = ppGroup1
+          Transparent = True
+          DBCalcType = dcCount
+          DataPipelineName = 'dbOrdem'
+          mmHeight = 3440
+          mmLeft = 16933
+          mmTop = 2381
+          mmWidth = 17198
+          BandType = 5
+          GroupNo = 0
+        end
+        object ppLine2: TppLine
+          UserName = 'Line2'
+          Position = lpBottom
+          Weight = 0.75
+          mmHeight = 1588
+          mmLeft = 0
+          mmTop = 6350
+          mmWidth = 197380
+          BandType = 5
+          GroupNo = 0
+        end
+      end
+    end
+  end
+  object Ordem: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspOrdem'
+    Left = 80
+    Top = 16
+  end
+  object dbOrdem: TppDBPipeline
+    DataSource = dsOrdem
+    UserName = 'dbOrdem'
+    Left = 144
+    Top = 16
+  end
+  object dtOrdem: TSQLQuery
+    SQLConnection = DmBanco.BancoDados
+    Params = <
+      item
+        DataType = ftDate
+        Name = 'DATAINI'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'DATAFIN'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select'
+      ' C.NUMERO,'
+      ' C.CAPACIDADE,'
+      ' C.VENCIMENTO,'
+      ' C.VENCTOCARGA,'
+      ' EXTRACT(year from C.VENCIMENTO) AS VENCTOTESTE,'
+      
+        ' EXTRACT(month FROM C.VENCTOCARGA)||"/"||EXTRACT(year from C.VEN' +
+        'CTOCARGA) AS VENCTCARGA,'
+      ' EXTRACT(year from C.ANOFAB) AS ANOFAB,'
+      
+        ' /*SUBSTRING(cast(C.VENCIMENTO AS CHAR(10)) FROM 6 FOR 4) AS VEN' +
+        'CTOTESTE,*/'
+      
+        ' /*SUBSTRING(cast(C.VENCIMENTO AS CHAR(10)) FROM 3 FOR 7) AS VEN' +
+        'CTOCARGA,*/'
+      ' C.SERIE,'
+      ' /*Cast(C.CODPESSOA AS CHAR(5))||"-"||P.NOME AS CODIGO_NOME,*/'
+      ' L.DESCLOCAL,'
+      ' P.FONE1,'
+      ' P.FONE2,'
+      ' P.CONTATO,'
+      ' P.CODCIDADE,'
+      ' P.RUA||"  "||P.NUMERO AS RUA,'
+      ' P.CODBAIRRO,'
+      ' P.NOME,'
+      ' P.CODPESSOA,'
+      ' C.CODMARCA,'
+      ' M.DESCMARCA,'
+      ' B.DESCBAIRRO,'
+      ' CI.DESCCIDADE'
+      ' FROM TCLIEXT C'
+      ' LEFT JOIN TLOCAL L ON C.CODLOCAL = L.CODLOCAL'
+      ' LEFT JOIN TPESSOA P ON C.CODPESSOA = P.CODPESSOA'
+      ' LEFT JOIN TBAIRRO B ON P.CODBAIRRO = B.CODBAIRRO'
+      ' LEFT JOIN TCIDADE CI ON P.CODCIDADE = CI.CODCIDADE'
+      ' LEFT JOIN TMARCA M ON C.CODMARCA = M.CODMARCA'
+      ' WHERE C.VENCTOCARGA BETWEEN :DATAINI AND :DATAFIN'
+      ' AND C.SELO > 0')
+    Left = 16
+    Top = 16
+  end
+end

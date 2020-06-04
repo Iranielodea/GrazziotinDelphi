@@ -1,0 +1,364 @@
+unit UCapacidade;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, Buttons, ExtCtrls, ComCtrls, StdCtrls, DBCtrls,
+  Mask, DB, FMTBcd, SqlExpr, DBClient;
+
+type
+  TfCapacidade = class(TForm)
+    PageControl1: TPageControl;
+    sheetLista: TTabSheet;
+    sheetCad: TTabSheet;
+    Panel1: TPanel;
+    Grade: TDBGrid;
+    dsCad: TDataSource;
+    GroupBox1: TGroupBox;
+    Label2: TLabel;
+    Codigo: TDBEdit;
+    Label7: TLabel;
+    Nome: TDBEdit;
+    Panel4: TPanel;
+    butCancelar: TBitBtn;
+    butOk: TBitBtn;
+    butInc: TBitBtn;
+    butExc: TBitBtn;
+    butPesq: TBitBtn;
+    butFechar: TBitBtn;
+    butAlt: TBitBtn;
+    butConf: TBitBtn;
+    Label1: TLabel;
+    Label3: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    DBEdit3: TDBEdit;
+    Label8: TLabel;
+    CodAgente: TDBEdit;
+    DescAgente: TEdit;
+    butAgente: TSpeedButton;
+    procedure FormActivate(Sender: TObject);
+    procedure butCancelarClick(Sender: TObject);
+    procedure butOkClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure GradeDblClick(Sender: TObject);
+    procedure GradeKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure butIncClick(Sender: TObject);
+    procedure butExcClick(Sender: TObject);
+    procedure ButFecharClick(Sender: TObject);
+    procedure butPesqClick(Sender: TObject);
+    procedure GradeEnter(Sender: TObject);
+    procedure GradeExit(Sender: TObject);
+    procedure butAltClick(Sender: TObject);
+    procedure butConfClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure CodAgenteExit(Sender: TObject);
+    procedure CodAgenteEnter(Sender: TObject);
+    procedure DescAgenteEnter(Sender: TObject);
+    procedure DescAgenteExit(Sender: TObject);
+    procedure butAgenteClick(Sender: TObject);
+    procedure sheetCadShow(Sender: TObject);
+  private
+    { Private declarations }
+    procedure pesquisaAgente(Tipo: string);
+  public
+    { Public declarations }
+  end;
+
+var
+  fCapacidade: TfCapacidade;
+
+implementation
+
+uses UDM, UDMBanco, UUtil, UPesquisa, UAgente;
+
+{$R *.dfm}
+
+procedure TfCapacidade.FormActivate(Sender: TObject);
+begin
+   if sheetLista.Showing then
+      Grade.SetFocus;
+end;
+
+procedure TfCapacidade.butCancelarClick(Sender: TObject);
+begin
+   dsCad.DataSet.Cancel;
+   sheetLista.TabVisible:=true;
+   sheetCad.TabVisible:=false;
+   Grade.SetFocus;
+end;
+
+procedure TfCapacidade.butOkClick(Sender: TObject);
+var tm: string[1];
+begin
+   dm.IniTrans;
+   tm:='A';
+   if dsCad.State = dsInsert then
+      tm:='I';
+   dsCad.DataSet.Post;
+   GravaTab((dsCad.dataset as TClientDataSet));
+   if tm = 'I' then
+   begin
+      dsCad.DataSet.Append;
+      Nome.SetFocus;
+   end
+   else begin
+      sheetLista.TabVisible:=true;
+      sheetCad.TabVisible:=false;
+      Grade.SetFocus;
+   end;
+   dm.GravaTrans;
+end;
+
+procedure TfCapacidade.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   if dsCad.DataSet.State in [dsedit,dsinsert] then
+   begin
+      if Confirma('Deseja salvar as alterações?','S') = idNo then
+         butCancelarClick(Self)
+      else
+         butOkClick(Self);
+   end;
+   dsCad.DataSet.close;
+   action:=cafree;
+end;
+
+procedure TfCapacidade.GradeDblClick(Sender: TObject);
+begin
+   if dsCad.DataSet.IsEmpty then
+      exit;
+   if butConf.Visible then
+   begin
+      butConfClick(Self);
+      exit;
+   end;
+   sheetLista.TabVisible:=false;
+   sheetCad.TabVisible:=true;
+   dsCad.DataSet.Edit;
+   Nome.SetFocus;
+end;
+
+procedure TfCapacidade.GradeKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if key = vk_Return then
+   begin
+      if dsCad.DataSet.IsEmpty then
+         exit;
+      GradeDblClick(Self);
+      if butConf.Visible = false then
+         sheetCad.SetFocus;
+   end;
+   case key of
+      vk_F2: butIncClick(Self);
+      vk_F3: butAltClick(Self);
+      vk_F4: butExcClick(Self);
+      vk_F5: butPesqClick(Self);
+      vk_F6: begin
+               if butConf.Visible then
+                  butConfClick(Self);
+             end;
+      vk_Escape: close;
+   end;
+end;
+
+procedure TfCapacidade.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+   if key = #13 then
+   begin
+      key:=#0;
+      perform(Wm_NextDlgCtl,0,0);
+   end;
+end;
+
+procedure TfCapacidade.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if key = vk_Escape then
+   begin
+      if sheetCad.Showing then
+         butCancelarClick(Self)
+      else
+         close;
+   end;
+end;
+
+procedure TfCapacidade.butIncClick(Sender: TObject);
+begin
+   sheetLista.TabVisible:=false;
+   sheetCad.TabVisible:=true;
+   dsCad.DataSet.Append;
+   Nome.SetFocus;
+end;
+
+procedure TfCapacidade.butExcClick(Sender: TObject);
+begin
+   if dsCad.DataSet.IsEmpty then
+      exit;
+   if dm.Integridade('TIORDEM','CODCAPACIDADE',dm.CapacidadeCODCAPACIDADE.Text) = false then
+      exit;
+   if dm.Integridade('TCLIEXT','CODCAPACIDADE',dm.CapacidadeCODCAPACIDADE.Text) = false then
+      exit;
+   if confirma('Confirma Exclusão?','N')=idno then
+      exit;
+   dm.IniTrans;
+   dsCad.DataSet.Delete;
+   GravaTab((dsCad.dataset as TClientDataSet));
+   dm.GravaTrans;
+end;
+
+procedure TfCapacidade.ButFecharClick(Sender: TObject);
+begin
+   close;
+end;
+
+procedure TfCapacidade.butPesqClick(Sender: TObject);
+begin
+   fPesquisa:=TfPesquisa.create(self);
+   fPesquisa.dsCad:=dsCad;
+   fPesquisa.showModal;
+   fPesquisa.free;
+   Grade.SetFocus;
+end;
+
+procedure TfCapacidade.GradeEnter(Sender: TObject);
+begin
+   fCapacidade.KeyPreview:=false;
+end;
+
+procedure TfCapacidade.GradeExit(Sender: TObject);
+begin
+   fCapacidade.KeyPreview:=true;
+end;
+
+procedure TfCapacidade.butAltClick(Sender: TObject);
+begin
+   if dsCad.DataSet.IsEmpty then
+      exit;
+   dsCad.DataSet.Edit;
+   sheetLista.TabVisible:=false;
+   sheetCad.TabVisible:=true;
+   Nome.SetFocus;
+end;
+
+procedure TfCapacidade.butConfClick(Sender: TObject);
+begin
+   vgcodigo:=dsCad.DataSet.Fields[0].Text;
+   close;
+end;
+
+procedure TfCapacidade.FormCreate(Sender: TObject);
+begin
+   sheetCad.TabVisible:=false;
+   if dscad.DataSet.Active = false then
+      procura((dsCad.dataset as TClientDataSet),'-1');
+end;
+
+procedure TfCapacidade.pesquisaAgente(Tipo: string);
+begin
+   if (CodAgente.Modified) or (DescAgente.Modified) then
+   begin
+      ModoEdicao(dm.Capacidade);
+      if Tipo = 'C' then
+         ComandoQuery(dm.Qsql,'select CODAGENTE,DESCAGENTE from TAGENTE where CODAGENTE = '+CodAgente.Text)
+      else
+         ComandoQuery(dm.Qsql,'select CODAGENTE,DESCAGENTE from TAGENTE where DESCAGENTE like "'+DescAgente.Text+'%"');
+      if dm.Qsql.RecordCount = 0 then
+      begin
+         dm.CapacidadeCODAGENTE.Clear;
+         DescAgente.Clear;
+      end;
+      if dm.Qsql.RecordCount = 1 then
+      begin
+         dm.CapacidadeCODAGENTE.Text:=dm.Qsql.fieldbyname('CODAGENTE').Text;
+         DESCAGENTE.Text:=dm.Qsql.fieldbyname('DESCAGENTE').Text;
+      end;
+      if dm.Qsql.RecordCount > 1 then
+      begin
+         procura(dm.Agente,DescAgente.Text+'%');
+         vgcodigo:='';
+         fAgente:=TfAgente.create(Self);
+         fAgente.butConf.Visible:=true;
+         fAgente.showModal;
+         if vgcodigo <> '' then
+         begin
+            ComandoQuery(dm.Qsql,'select DESCAGENTE from TAGENTE where CODAGENTE = '+vgcodigo);
+            dm.CapacidadeCODAGENTE.Text:=vgcodigo;
+            DESCAGENTE.Text:=dm.Qsql.fieldbyname('DESCAGENTE').Text;
+            DescAgente.SetFocus;
+         end
+         else begin
+            dm.CapacidadeCODAGENTE.Clear;
+            DescAgente.clear;
+         end;
+      end;
+      dm.Qsql.Close;
+   end;
+end;
+
+procedure TfCapacidade.CodAgenteExit(Sender: TObject);
+begin
+   if CodAgente.Modified = false then exit;
+   if CodAgente.Text <> '' then
+      PesquisaAgente('C')
+   else
+      DescAgente.Clear;
+end;
+
+procedure TfCapacidade.CodAgenteEnter(Sender: TObject);
+begin
+   CodAgente.Modified := False;
+end;
+
+procedure TfCapacidade.DescAgenteEnter(Sender: TObject);
+begin
+   DescAgente.Modified := False;
+end;
+
+procedure TfCapacidade.DescAgenteExit(Sender: TObject);
+begin
+   if DescAgente.Modified = false then exit;
+   if DescAgente.Text <> '' then
+      PesquisaAgente('D')
+   else begin
+      ModoEdicao(dm.Capacidade);
+      dm.CapacidadeCODAGENTE.Clear;
+   end;
+end;
+
+procedure TfCapacidade.butAgenteClick(Sender: TObject);
+begin
+   vgcodigo:='';
+   procura(dm.Agente,'%');
+   fAgente:=TfAgente.create(Self);
+   fAgente.butConf.Visible:=true;
+   fAgente.showModal;
+   if vgcodigo <> '' then
+   begin
+      ComandoQuery(dm.Qsql,'select DESCAGENTE from TAGENTE where CODAGENTE = '+vgcodigo);
+      ModoEdicao(dm.Capacidade);
+      dm.CapacidadeCODAGENTE.Text:=vgcodigo;
+      DESCAGENTE.Text:=dm.Qsql.fieldbyname('DESCAGENTE').Text;
+      DescAgente.SetFocus;
+      dm.Qsql.Close;
+   end;
+end;
+
+procedure TfCapacidade.sheetCadShow(Sender: TObject);
+begin
+   if CodAgente.Text <> '' then
+   begin
+      CodAgente.Modified := True;
+      CodAgenteExit(self);
+   end;
+end;
+
+end.

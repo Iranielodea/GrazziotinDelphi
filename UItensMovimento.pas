@@ -1,0 +1,194 @@
+unit UItensMovimento;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, StdCtrls, Buttons, ExtCtrls, Mask, DBCtrls;
+
+type
+  TfItensMovimento = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    CboLote: TComboBox;
+    DBEdit1: TDBEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    DBEdit2: TDBEdit;
+    EditEstoque: TEdit;
+    Panel1: TPanel;
+    butSalvar: TBitBtn;
+    butNovo: TBitBtn;
+    butSair: TBitBtn;
+    dsCad: TDataSource;
+    Label5: TLabel;
+    Data: TDBEdit;
+    Label6: TLabel;
+    Tipo: TDBComboBox;
+    procedure butSairClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure CboLoteExit(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure CboLoteChange(Sender: TObject);
+    procedure dsCadStateChange(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure butSalvarClick(Sender: TObject);
+    procedure butNovoClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fItensMovimento: TfItensMovimento;
+
+implementation
+
+uses UDM, UUtil, UDMBanco;
+
+var vloteant,vqtdeant: string[30];
+   vtipoant: string[1];
+
+{$R *.dfm}
+
+procedure TfItensMovimento.butSairClick(Sender: TObject);
+begin
+   close;
+end;
+
+procedure TfItensMovimento.FormCreate(Sender: TObject);
+begin
+   dm.Qsql.Close;
+   dm.Qsql.SQL.Clear;
+   dm.Qsql.SQL.Add('select LOTERESUMIDO from TESTLOTE');
+   dm.Qsql.Open;
+   CboLote.Clear;
+   while not dm.Qsql.Eof do
+   begin
+      CboLote.Items.Add(dm.Qsql.fieldbyname('LOTERESUMIDO').Text);
+      dm.Qsql.Next;
+   end;
+   dm.Qsql.Close;
+   CboLote.Text:=dm.MovimentoLOTERESUMIDO.Text;
+   if not dm.Movimento.IsEmpty then
+   begin
+      comandoQuery(dm.Qsql,'select QTDEESTOQUE from TESTLOTE where LOTERESUMIDO = "'+dm.MovimentoLOTERESUMIDO.Text+'"');
+      editEstoque.text:=formatfloat('###,###,##0.00',dm.Qsql.fieldbyname('QTDEESTOQUE').AsFloat);
+   end;
+   vloteant:=dm.MovimentoLOTERESUMIDO.Text;
+   vqtdeant:=dm.MovimentoQTDE.AsString;
+   dm.Qsql.close;
+   if (dsCad.DataSet.IsEmpty) or (dm.MovimentoDATA.IsNull) then
+   begin
+      dsCad.DataSet.Append;
+      dm.MovimentoDATA.AsDateTime:=date;
+      dm.MovimentoTIPO.Text:='E';
+   end
+   else
+      dsCad.DataSet.Edit;
+   vtipoant:=dm.MovimentoTIPO.Text;
+   vqtdeant:=dm.MovimentoQTDE.Text;
+   vloteant:=dm.MovimentoLOTERESUMIDO.Text;
+end;
+
+procedure TfItensMovimento.CboLoteExit(Sender: TObject);
+begin
+   comandoQuery(dm.Qsql,'select * from TESTLOTE where LOTERESUMIDO = "'+CboLote.Text+'"');
+   EditEstoque.Text:=formatfloat('###,###,##0.00',dm.Qsql.fieldbyname('QTDEESTOQUE').AsFloat);
+   dm.Qsql.close;
+end;
+
+procedure TfItensMovimento.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+   if dscad.State in [dsedit,dsinsert] then
+      dsCad.DataSet.cancel;
+   action:=cafree;
+end;
+
+procedure TfItensMovimento.CboLoteChange(Sender: TObject);
+begin
+   comandoQuery(dm.Qsql,'select * from TESTLOTE where LOTERESUMIDO = "'+CboLote.Text+'"');
+   EditEstoque.Text:=formatfloat('###,###,##0.00',dm.Qsql.fieldbyname('QTDEESTOQUE').AsFloat);
+   dm.Qsql.close;
+end;
+
+procedure TfItensMovimento.dsCadStateChange(Sender: TObject);
+begin
+   butSalvar.Enabled:=dscad.State in [dsinsert,dsEdit];
+   butNovo.Enabled:=dscad.State in [dsbrowse,dsedit];
+end;
+
+procedure TfItensMovimento.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+   if key = #13 then
+   begin
+      key:=#0;
+      perform(Wm_NextDlgCtl,0,0);
+   end;
+end;
+
+procedure TfItensMovimento.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if key = vk_Escape then
+      close;
+end;
+
+procedure TfItensMovimento.butSalvarClick(Sender: TObject);
+var vqtde: string[20];
+begin
+   if CboLote.Text = '' then
+   begin
+      mensagem('Informe o Lote');
+      exit;
+   end;
+   if dm.MovimentoQTDE.AsFloat = 0 then
+   begin
+      mensagem('Informe a Quantidade');
+      exit;
+   end;
+   if data.Text = '' then
+   begin
+      mensagem('Informe a Data');
+      exit;
+   end;
+
+   try
+      dm.IniTrans;
+      if dsCad.State = dsInsert then
+         dm.MovimentoLOTERESUMIDO.Text:=CboLote.text;
+      dm.MovimentoLOTERESUMIDO.Text:=CboLote.Text;
+      dm.Movimento.Post;
+      GravaTab(dm.Movimento);
+      dm.GravaTrans;
+      except
+        on E: Exception do
+        begin
+          dm.CancelaTrans;
+          mensagem(pwideChar('Gravação Cancelada: ' + E.Message));
+        end;
+   end;
+   vloteant:=dm.MovimentoLOTERESUMIDO.Text;
+   vqtdeant:=dm.MovimentoQTDE.AsString;
+   vtipoant:=dm.MovimentoTIPO.Text;
+   butNovo.SetFocus;
+end;
+
+procedure TfItensMovimento.butNovoClick(Sender: TObject);
+begin
+   vloteant:='';
+   vqtdeant:='0';
+   vtipoant:='';
+   EditEstoque.Text:='0,00';
+   CboLote.Text:='';
+   dscad.DataSet.Append;
+   dm.MovimentoDATA.AsDateTime:=date;
+   dm.MovimentoTIPO.Text:='E';
+   CboLote.SetFocus;
+end;
+
+end.

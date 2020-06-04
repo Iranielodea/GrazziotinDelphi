@@ -1,0 +1,33 @@
+object DmBanco: TDmBanco
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
+  Left = 255
+  Top = 91
+  Height = 123
+  Width = 190
+  object BancoDados: TSQLConnection
+    ConnectionName = 'Grazziotin'
+    DriverName = 'Interbase'
+    GetDriverFunc = 'getSQLDriverINTERBASE'
+    LibraryName = 'dbexpint.dll'
+    LoginPrompt = False
+    Params.Strings = (
+      'DriverName=Interbase'
+      'BlobSize=-1'
+      'CommitRetain=False'
+      'Database=C:\work\Grazziotin\Banco\Graz.fdb'
+      'ErrorResourceFile='
+      'LocaleCode=0000'
+      'Password=rota11'
+      'RoleName=RoleName'
+      'ServerCharSet='
+      'SQLDialect=1'
+      'Interbase TransIsolation=ReadCommited'
+      'User_Name=sysdba'
+      'WaitOnLocks=True')
+    VendorLib = 'GDS32.DLL'
+    Left = 56
+    Top = 8
+  end
+end

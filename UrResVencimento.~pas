@@ -1,0 +1,104 @@
+unit UrResVencimento;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, FMTBcd, ppDB, ppDBPipe, DB, DBClient, Provider, SqlExpr,
+  ppBands, ppClass, ppCtrls, ppVar, ppPrnabl, ppCache, ppComm, ppRelatv,
+  ppProd, ppReport, ppViewr;
+
+type
+  TFrResVencimento = class(TForm)
+    relResumo: TppReport;
+    ppHeaderBand2: TppHeaderBand;
+    ppLabel9: TppLabel;
+    ppSystemVariable4: TppSystemVariable;
+    ppLabel12: TppLabel;
+    ppLabel20: TppLabel;
+    ppLine3: TppLine;
+    lblData: TppLabel;
+    ppLabel25: TppLabel;
+    ppLabel26: TppLabel;
+    ppLabel27: TppLabel;
+    ppDetailBand2: TppDetailBand;
+    ppSummaryBand2: TppSummaryBand;
+    ppLabel24: TppLabel;
+    ppDBCalc3: TppDBCalc;
+    ppLine4: TppLine;
+    ppDBCalc5: TppDBCalc;
+    ppDBText11: TppDBText;
+    ppDBText20: TppDBText;
+    ppDBText21: TppDBText;
+    ppDBText22: TppDBText;
+    ppDBText23: TppDBText;
+    Qresumo: TSQLQuery;
+    dsResumo: TDataSource;
+    dspResumo: TDataSetProvider;
+    Resumo: TClientDataSet;
+    dbResumo: TppDBPipeline;
+    ppDBText1: TppDBText;
+    RelResumoC: TppReport;
+    dbResumoC: TppDBPipeline;
+    QresumoC: TSQLQuery;
+    dspResumoC: TDataSetProvider;
+    ResumoC: TClientDataSet;
+    dsResumoC: TDataSource;
+    ppSystemVariable1: TppSystemVariable;
+    ppHeaderBand1: TppHeaderBand;
+    ppDetailBand1: TppDetailBand;
+    ppLabel1: TppLabel;
+    ppSystemVariable2: TppSystemVariable;
+    lblDataCid: TppLabel;
+    ppSystemVariable3: TppSystemVariable;
+    ppLabel3: TppLabel;
+    ppLine1: TppLine;
+    ppLabel4: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel6: TppLabel;
+    ppLabel7: TppLabel;
+    ppDBText2: TppDBText;
+    ppDBText3: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText5: TppDBText;
+    ppDBText6: TppDBText;
+    ppDBText7: TppDBText;
+    ppSummaryBand1: TppSummaryBand;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppLabel8: TppLabel;
+    ppDBText8: TppDBText;
+    ppDBText9: TppDBText;
+    ppLabel10: TppLabel;
+    ppDBCalc1: TppDBCalc;
+    ppDBCalc2: TppDBCalc;
+    ppLine2: TppLine;
+    ppLabel11: TppLabel;
+    ppDBCalc4: TppDBCalc;
+    ppDBCalc6: TppDBCalc;
+    lblVend: TppLabel;
+    lblVend1: TppLabel;
+    procedure relResumoPreviewFormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrResVencimento: TFrResVencimento;
+
+implementation
+
+uses UDMBanco;
+
+{$R *.dfm}
+
+procedure TFrResVencimento.relResumoPreviewFormCreate(Sender: TObject);
+begin
+   TPPReport(Sender).PreviewForm.WindowState:=wsMaximized;
+   TPPViewer(TPPReport(Sender).PreviewForm.Viewer).ZoomPercentage:=90;
+end;
+
+end.

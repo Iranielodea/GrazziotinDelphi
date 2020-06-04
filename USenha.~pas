@@ -1,0 +1,95 @@
+unit USenha;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, StdCtrls, Buttons;
+
+type
+  TfSenha = class(TForm)
+    Panel1: TPanel;
+    butOk: TBitBtn;
+    butSair: TBitBtn;
+    Label1: TLabel;
+    Label2: TLabel;
+    Nome: TEdit;
+    Senha: TEdit;
+    procedure butSairClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure butOkClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fSenha: TfSenha;
+
+implementation
+
+uses UMenuPrin, UDM;
+
+{$R *.dfm}
+
+procedure TfSenha.butSairClick(Sender: TObject);
+begin
+   application.Terminate;
+end;
+
+procedure TfSenha.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+   if key = #13 then
+   begin
+      key:=#0;
+      perform(Wm_NextDlgCtl,0,0);
+   end;
+
+end;
+
+procedure TfSenha.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if key = vk_Escape then
+      application.Terminate;
+end;
+
+procedure TfSenha.butOkClick(Sender: TObject);
+begin
+   if (Nome.Text = 'SUPERVISOR') and (Senha.text = 'DELPHI') then
+   begin
+      vgUsuario := 'SUPERVISOR';
+      fMenuPrin.show;
+      fSenha.Visible := false;
+      fSenha.WindowState := wsMinimized;
+      exit;
+   end;
+
+   dm.GetUsuario(Nome.Text);
+   if dm.CadUsuario.IsEmpty then
+   begin
+      showMessage('Usuário não Encontrado!');
+      dm.CadUsuario.Close;
+      Nome.SetFocus;
+      exit;
+   end;
+
+   if dm.CadUsuarioSENHA.Text <> Senha.Text then
+   begin
+      showMessage('Usuário não Encontrado!');
+      dm.CadUsuario.Close;
+      exit;
+   end;
+
+   vgUsuario := Nome.Text;
+
+   fMenuPrin.show;
+   fSenha.Visible := false;
+   fSenha.WindowState := wsMinimized;
+
+end;
+
+end.
