@@ -199,12 +199,6 @@ begin
       except
       end;
 
-      try
-        frCliExtintor_2.lblDadosEmpresa2.Caption := DadosEmpresa;
-      except
-
-      end;
-
       RelServico.Print;
       Servico.close;
       Qobs.close;
@@ -253,12 +247,6 @@ begin
       try
         frCliExtintor_2.lblDadosEmpresa1.Caption := DadosEmpresa;
       except
-      end;
-
-      try
-        frCliExtintor_2.lblDadosEmpresa2.Caption := DadosEmpresa;
-      except
-
       end;
 
       RelTeste.Print;
@@ -502,12 +490,6 @@ begin
       try
         frCliExtintor_2.lblDadosEmpresa1.Caption := DadosEmpresa;
       except
-      end;
-
-      try
-        frCliExtintor_2.lblDadosEmpresa2.Caption := DadosEmpresa;
-      except
-
       end;
 
       RelServico.Print;

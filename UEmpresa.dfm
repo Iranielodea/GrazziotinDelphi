@@ -26,7 +26,7 @@ object fEmpresa: TfEmpresa
     Top = 0
     Width = 552
     Height = 416
-    ActivePage = sheetLista
+    ActivePage = sheetCad
     Align = alClient
     TabOrder = 0
     object sheetLista: TTabSheet

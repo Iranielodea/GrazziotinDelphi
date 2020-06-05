@@ -52,6 +52,7 @@ type
     ServicoLOTERESUMIDO: TStringField;
     ServicoC_DESCMARCA: TStringField;
     ServicoCAPACID_EXTINTORA: TStringField;
+    ServicoNUMINMETRO: TStringField;
     ppHeaderBand1: TppHeaderBand;
     ppLabel17: TppLabel;
     ppLabel18: TppLabel;
@@ -93,6 +94,9 @@ type
     ppLine12: TppLine;
     ppLabel26: TppLabel;
     lblDadosEmpresa2: TppLabel;
+    ppLabel28: TppLabel;
+    ppLabel29: TppLabel;
+    ppDBText20: TppDBText;
     ppDetailBand1: TppDetailBand;
     ppLine3: TppLine;
     ppDBText1: TppDBText;
@@ -111,6 +115,8 @@ type
     ppDBText7: TppDBText;
     ppLine11: TppLine;
     ppDBText8: TppDBText;
+    ppLine14: TppLine;
+    ppDBText10: TppDBText;
     ppFooterBand1: TppFooterBand;
     lblObs: TppLabel;
     ppLine13: TppLine;
@@ -119,6 +125,7 @@ type
     ppLine1: TppLine;
     lblNormas: TppLabel;
     ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
     procedure RelServicoPreviewFormCreate(Sender: TObject);
     procedure ServicoCalcFields(DataSet: TDataSet);
   private

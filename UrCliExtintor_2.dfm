@@ -156,6 +156,10 @@ object frCliExtintor_2: TfrCliExtintor_2
       FieldName = 'CAPACID_EXTINTORA'
       Size = 30
     end
+    object ServicoNUMINMETRO: TStringField
+      FieldName = 'NUMINMETRO'
+      Size = 120
+    end
   end
   object dsServico: TDataSource
     DataSet = Servico
@@ -178,7 +182,7 @@ object frCliExtintor_2: TfrCliExtintor_2
     PrinterSetup.mmPaperHeight = 210000
     PrinterSetup.mmPaperWidth = 297000
     PrinterSetup.PaperSize = 9
-    Template.FileName = 'C:\Projetos\Grazziotin\ClienteExtintor_Paisagem.rtm'
+    Template.FileName = 'C:\Projetos\Grazziotin\InspecaoTecnica.rtm'
     ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
     DeviceType = 'Screen'
     DefaultFileDeviceType = 'PDF'
@@ -314,7 +318,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         Font.Style = []
         Transparent = True
         mmHeight = 3175
-        mmLeft = 113506
+        mmLeft = 138377
         mmTop = 95250
         mmWidth = 7673
         BandType = 0
@@ -330,7 +334,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         Font.Style = []
         Transparent = True
         mmHeight = 3175
-        mmLeft = 142611
+        mmLeft = 191294
         mmTop = 95250
         mmWidth = 14552
         BandType = 0
@@ -338,17 +342,17 @@ object frCliExtintor_2: TfrCliExtintor_2
       end
       object ppLabel24: TppLabel
         UserName = 'Label24'
-        Caption = 'Selo Atual'
+        Caption = 'Selo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = []
         Transparent = True
-        mmHeight = 3175
-        mmLeft = 205052
+        mmHeight = 3704
+        mmLeft = 257969
         mmTop = 95250
-        mmWidth = 12700
+        mmWidth = 5556
         BandType = 0
         LayerName = Foreground
       end
@@ -356,10 +360,10 @@ object frCliExtintor_2: TfrCliExtintor_2
         UserName = 'Line2'
         Position = lpBottom
         Weight = 0.750000000000000000
-        mmHeight = 2381
+        mmHeight = 1588
         mmLeft = 0
-        mmTop = 97367
-        mmWidth = 219075
+        mmTop = 98161
+        mmWidth = 275167
         BandType = 0
         LayerName = Foreground
       end
@@ -417,17 +421,17 @@ object frCliExtintor_2: TfrCliExtintor_2
       end
       object ppLabel4: TppLabel
         UserName = 'Label3'
-        Caption = 'Credenciada no INMETRO C'#243'digo de Registro 3671/2013'
+        Caption = 'Credenciada no INMETRO C'#243'digo de '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 4191
+        mmHeight = 4233
         mmLeft = 0
         mmTop = 44450
-        mmWidth = 94658
+        mmWidth = 62706
         BandType = 0
         LayerName = Foreground
       end
@@ -863,7 +867,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         BandType = 0
         LayerName = Foreground
       end
-      object lblDadosEmpresa2: TppLabel
+      object ppLabel27: TppLabel
         UserName = 'Label13'
         Caption = 
           'CNPJ: 94.287.117/0001-41    I.E.: 003671/2013   FONE/FAX: 54 329' +
@@ -913,19 +917,39 @@ object frCliExtintor_2: TfrCliExtintor_2
         BandType = 0
         LayerName = Foreground
       end
-      object ppLabel30: TppLabel
-        UserName = 'Label28'
-        Caption = 'Label28'
+      object ppLabel32: TppLabel
+        UserName = 'Label30'
+        AutoSize = False
+        Caption = 'Vencto Inspe'#231#227'o T'#233'cnica'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        WordWrap = True
+        mmHeight = 7408
+        mmLeft = 114300
+        mmTop = 92075
+        mmWidth = 22225
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppDBText40: TppDBText
+        UserName = 'DBText40'
+        DataField = 'NUMINMETRO'
+        DataPipeline = dbServico
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
-        Font.Style = []
+        Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 153194
-        mmTop = 25400
-        mmWidth = 11906
+        DataPipelineName = 'dbServico'
+        mmHeight = 4498
+        mmLeft = 62442
+        mmTop = 44450
+        mmWidth = 45244
         BandType = 0
         LayerName = Foreground
       end
@@ -970,7 +994,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         Position = lpRight
         Weight = 0.750000000000000000
         mmHeight = 4233
-        mmLeft = 213519
+        mmLeft = 269611
         mmTop = 0
         mmWidth = 5556
         BandType = 4
@@ -1057,7 +1081,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         Transparent = True
         DataPipelineName = 'dbServico'
         mmHeight = 3175
-        mmLeft = 67204
+        mmLeft = 75936
         mmTop = 0
         mmWidth = 14552
         BandType = 4
@@ -1068,7 +1092,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         Position = lpLeft
         Weight = 0.750000000000000000
         mmHeight = 4233
-        mmLeft = 82021
+        mmLeft = 90752
         mmTop = 0
         mmWidth = 2117
         BandType = 4
@@ -1086,7 +1110,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         Transparent = True
         DataPipelineName = 'dbServico'
         mmHeight = 3175
-        mmLeft = 82550
+        mmLeft = 91281
         mmTop = 0
         mmWidth = 16404
         BandType = 4
@@ -1097,7 +1121,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         Position = lpLeft
         Weight = 0.750000000000000000
         mmHeight = 4233
-        mmLeft = 99484
+        mmLeft = 108215
         mmTop = 0
         mmWidth = 2117
         BandType = 4
@@ -1115,9 +1139,9 @@ object frCliExtintor_2: TfrCliExtintor_2
         Transparent = True
         DataPipelineName = 'dbServico'
         mmHeight = 3175
-        mmLeft = 100013
+        mmLeft = 138377
         mmTop = 0
-        mmWidth = 32544
+        mmWidth = 51594
         BandType = 4
         LayerName = Foreground
       end
@@ -1126,7 +1150,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         Position = lpLeft
         Weight = 0.750000000000000000
         mmHeight = 4233
-        mmLeft = 133086
+        mmLeft = 190500
         mmTop = 0
         mmWidth = 2117
         BandType = 4
@@ -1144,7 +1168,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         Transparent = True
         DataPipelineName = 'dbServico'
         mmHeight = 3175
-        mmLeft = 133879
+        mmLeft = 191294
         mmTop = 0
         mmWidth = 60061
         BandType = 4
@@ -1155,7 +1179,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         Position = lpLeft
         Weight = 0.750000000000000000
         mmHeight = 4233
-        mmLeft = 194734
+        mmLeft = 252148
         mmTop = 0
         mmWidth = 2117
         BandType = 4
@@ -1173,7 +1197,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         Transparent = True
         DataPipelineName = 'dbServico'
         mmHeight = 3175
-        mmLeft = 196321
+        mmLeft = 256646
         mmTop = 0
         mmWidth = 17198
         BandType = 4
@@ -1184,7 +1208,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         Position = lpLeft
         Weight = 0.750000000000000000
         mmHeight = 4233
-        mmLeft = 65088
+        mmLeft = 73819
         mmTop = 0
         mmWidth = 2117
         BandType = 4
@@ -1204,7 +1228,36 @@ object frCliExtintor_2: TfrCliExtintor_2
         mmHeight = 3175
         mmLeft = 41275
         mmTop = 0
-        mmWidth = 23283
+        mmWidth = 31485
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText20: TppDBText
+        UserName = 'DBText20'
+        DataField = 'DATA_INSPECAO'
+        DataPipeline = dbServico
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbServico'
+        mmHeight = 4498
+        mmLeft = 115623
+        mmTop = 0
+        mmWidth = 20902
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLine15: TppLine
+        UserName = 'Line15'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 4233
+        mmLeft = 136525
+        mmTop = 0
+        mmWidth = 2117
         BandType = 4
         LayerName = Foreground
       end
@@ -1225,10 +1278,10 @@ object frCliExtintor_2: TfrCliExtintor_2
         Font.Style = []
         Transparent = True
         WordWrap = True
-        mmHeight = 13494
+        mmHeight = 5027
         mmLeft = 0
         mmTop = 794
-        mmWidth = 219075
+        mmWidth = 229130
         BandType = 8
         LayerName = Foreground
       end
@@ -1258,6 +1311,24 @@ object frCliExtintor_2: TfrCliExtintor_2
         BandType = 8
         LayerName = Foreground
       end
+      object ppLabel31: TppLabel
+        UserName = 'Label29'
+        AutoSize = False
+        Caption = 'Registro INMETRO 003671/13'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3704
+        mmLeft = 103717
+        mmTop = 22490
+        mmWidth = 78846
+        BandType = 8
+        LayerName = Foreground
+      end
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
@@ -1271,7 +1342,7 @@ object frCliExtintor_2: TfrCliExtintor_2
         mmHeight = 1323
         mmLeft = 0
         mmTop = 0
-        mmWidth = 219075
+        mmWidth = 275167
         BandType = 7
         LayerName = Foreground
       end
@@ -1286,10 +1357,26 @@ object frCliExtintor_2: TfrCliExtintor_2
         Font.Style = []
         Transparent = True
         WordWrap = True
-        mmHeight = 13758
+        mmHeight = 5027
         mmLeft = 0
         mmTop = 1588
-        mmWidth = 219075
+        mmWidth = 275167
+        BandType = 7
+        LayerName = Foreground
+      end
+      object ppLabel30: TppLabel
+        UserName = 'Label28'
+        Caption = 'Inspe'#231#227'o T'#233'cnica anual conforme NBR 12962'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3704
+        mmLeft = 0
+        mmTop = 7673
+        mmWidth = 58208
         BandType = 7
         LayerName = Foreground
       end
@@ -1413,6 +1500,7 @@ object frCliExtintor_2: TfrCliExtintor_2
       ' TCIDADE.DESCCIDADE,'
       ' TCIDADE.UF,'
       ' TPESSOA.CONTATO,'
+      ' (SELECT FIRST 1 FRANQUEADA FROM TMEMP) AS NUMINMETRO,'
       ' TPESSOA.FONE1'
       ''
       
@@ -1439,316 +1527,6 @@ object frCliExtintor_2: TfrCliExtintor_2
     UserName = 'dbServico'
     Left = 152
     Top = 16
-    object pfldServicoppField1: TppField
-      FieldAlias = 'NUMERO'
-      FieldName = 'NUMERO'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 0
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField2: TppField
-      FieldAlias = 'CODPESSOA'
-      FieldName = 'CODPESSOA'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 1
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField3: TppField
-      FieldAlias = 'CODMARCA'
-      FieldName = 'CODMARCA'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 2
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField4: TppField
-      FieldAlias = 'REFERENCIA'
-      FieldName = 'REFERENCIA'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 3
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField5: TppField
-      FieldAlias = 'SERIE'
-      FieldName = 'SERIE'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 4
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField6: TppField
-      FieldAlias = 'SELO'
-      FieldName = 'SELO'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 5
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField7: TppField
-      FieldAlias = 'ULTIMOSELO'
-      FieldName = 'ULTIMOSELO'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 6
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField8: TppField
-      FieldAlias = 'CAPACIDADE'
-      FieldName = 'CAPACIDADE'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 7
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField9: TppField
-      FieldAlias = 'CONSERVACAO'
-      FieldName = 'CONSERVACAO'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 8
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField10: TppField
-      FieldAlias = 'CODLOCAL'
-      FieldName = 'CODLOCAL'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 9
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField11: TppField
-      FieldAlias = 'DESCMARCA'
-      FieldName = 'DESCMARCA'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 10
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField12: TppField
-      FieldAlias = 'CONTATO'
-      FieldName = 'CONTATO'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 11
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField13: TppField
-      FieldAlias = 'DESCLOCAL'
-      FieldName = 'DESCLOCAL'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 12
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField14: TppField
-      FieldAlias = 'NOME'
-      FieldName = 'NOME'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 13
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField15: TppField
-      FieldAlias = 'RUA'
-      FieldName = 'RUA'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 14
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField16: TppField
-      FieldAlias = 'DESCBAIRRO'
-      FieldName = 'DESCBAIRRO'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 15
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField17: TppField
-      FieldAlias = 'DESCCIDADE'
-      FieldName = 'DESCCIDADE'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 16
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField18: TppField
-      FieldAlias = 'UF'
-      FieldName = 'UF'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 17
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField19: TppField
-      FieldAlias = 'FONE1'
-      FieldName = 'FONE1'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 18
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField20: TppField
-      FieldAlias = 'ENDERECO'
-      FieldName = 'ENDERECO'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 19
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField21: TppField
-      FieldAlias = 'DATA_EMISSAO'
-      FieldName = 'DATA_EMISSAO'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 20
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField22: TppField
-      FieldAlias = 'NUM_RELATORIO'
-      FieldName = 'NUM_RELATORIO'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 21
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField23: TppField
-      FieldAlias = 'COMPLEMENTO'
-      FieldName = 'COMPLEMENTO'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 22
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField24: TppField
-      FieldAlias = 'VENCTOCARGA'
-      FieldName = 'VENCTOCARGA'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 23
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField25: TppField
-      FieldAlias = 'VENCTOTESTE'
-      FieldName = 'VENCTOTESTE'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 24
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField26: TppField
-      FieldAlias = 'CVENCTO_CARGA'
-      FieldName = 'CVENCTO_CARGA'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 25
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField27: TppField
-      FieldAlias = 'LOTERESUMIDO'
-      FieldName = 'LOTERESUMIDO'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 26
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField28: TppField
-      FieldAlias = 'C_DESCMARCA'
-      FieldName = 'C_DESCMARCA'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 27
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField29: TppField
-      FieldAlias = 'DATA_INSPECAO'
-      FieldName = 'DATA_INSPECAO'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 28
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField30: TppField
-      FieldAlias = 'NUM_CASA'
-      FieldName = 'NUM_CASA'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 29
-      Searchable = False
-      Sortable = False
-    end
-    object pfldServicoppField31: TppField
-      FieldAlias = 'CAPACID_EXTINTORA'
-      FieldName = 'CAPACID_EXTINTORA'
-      FieldLength = 0
-      DataType = dtNotKnown
-      DisplayWidth = 0
-      Position = 30
-      Searchable = False
-      Sortable = False
-    end
   end
   object dbTeste: TppDBPipeline
     DataSource = dsServico
@@ -1912,19 +1690,19 @@ object frCliExtintor_2: TfrCliExtintor_2
         BandType = 0
         LayerName = Foreground1
       end
-      object ppLabel38: TppLabel
-        UserName = 'Label38'
-        Caption = 'Credenciada no INMETRO C'#243'digo de Registro 109'
+      object RelTesteLblInMetroCaption: TppLabel
+        UserName = 'RelTesteLblInMetroCaption'
+        Caption = 'Credenciada no INMETRO C'#243'digo de '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 4233
+        mmHeight = 4234
         mmLeft = 529
         mmTop = 44979
-        mmWidth = 83079
+        mmWidth = 62707
         BandType = 0
         LayerName = Foreground1
       end
@@ -2438,6 +2216,24 @@ object frCliExtintor_2: TfrCliExtintor_2
         mmLeft = 0
         mmTop = 98161
         mmWidth = 194205
+        BandType = 0
+        LayerName = Foreground1
+      end
+      object ppDBText39: TppDBText
+        UserName = 'DBText39'
+        DataField = 'NUMINMETRO'
+        DataPipeline = dbTeste
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        Transparent = True
+        DataPipelineName = 'dbTeste'
+        mmHeight = 4498
+        mmLeft = 62971
+        mmTop = 44979
+        mmWidth = 48419
         BandType = 0
         LayerName = Foreground1
       end
