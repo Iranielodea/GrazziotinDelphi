@@ -2,3 +2,6 @@
 /Banco/*.FDB
 /Banco/TEMP
 /Documentos
+/*.~ddp
+/*.~dfm
+/*.~pas
