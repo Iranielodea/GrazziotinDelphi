@@ -787,7 +787,7 @@ begin
   ie := dm.EmpresaINSCESTADUAL.AsString;
   telefone := dm.EmpresaFONEFAX.AsString;
 
-  Result := 'CNPJ: ' + cnpj + '   I.E.: ' + ie + '   FONE/FAX: ' + telefone;
+  Result := 'CNPJ: ' + cnpj + '   Insc. Estadual: ' + ie + '   FONE/FAX: ' + telefone;
 end;
 
 procedure TDM.DataModuleCreate(Sender: TObject);

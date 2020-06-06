@@ -72,7 +72,6 @@ type
     ppLabel35: TppLabel;
     lblDadosEmpresa1: TppLabel;
     ppLabel37: TppLabel;
-    RelTesteLblInMetroCaption: TppLabel;
     ppLabel39: TppLabel;
     ppLabel40: TppLabel;
     ppLabel41: TppLabel;
@@ -139,7 +138,6 @@ type
     Linha1: TppLabel;
     Linha2: TppLabel;
     ppLabel3: TppLabel;
-    ppLabel4: TppLabel;
     ppLabel5: TppLabel;
     ppLabel6: TppLabel;
     ppLabel7: TppLabel;
@@ -166,10 +164,10 @@ type
     ppLabel2: TppLabel;
     ppLine12: TppLine;
     ppLabel26: TppLabel;
-    ppLabel27: TppLabel;
+    lblDadosEmpresa2: TppLabel;
     ppLabel28: TppLabel;
     ppLabel29: TppLabel;
-    ppLabel32: TppLabel;
+    ppDBText20: TppDBText;
     ppDetailBand1: TppDetailBand;
     ppLine3: TppLine;
     ppDBText1: TppDBText;
@@ -190,20 +188,15 @@ type
     ppDBText8: TppDBText;
     ppLine14: TppLine;
     ppDBText10: TppDBText;
-    ppDBText20: TppDBText;
-    ppLine15: TppLine;
     ppFooterBand1: TppFooterBand;
     lblObs: TppLabel;
     ppLine13: TppLine;
     ppLabel25: TppLabel;
-    ppLabel31: TppLabel;
     ppSummaryBand1: TppSummaryBand;
     ppLine1: TppLine;
     lblNormas: TppLabel;
-    ppLabel30: TppLabel;
     ppDesignLayers1: TppDesignLayers;
     ppDesignLayer1: TppDesignLayer;
-    ppDBText40: TppDBText;
     procedure RelServicoPreviewFormCreate(Sender: TObject);
     procedure ServicoCalcFields(DataSet: TDataSet);
   private
