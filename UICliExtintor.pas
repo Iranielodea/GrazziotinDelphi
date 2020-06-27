@@ -479,13 +479,13 @@ begin
          lblNormas.Caption:=lblNormas.Caption + QnormasDESCRICAO.Text;
          Qnormas.Next;
       end;
-//      Qobs.close;
-//      Qobs.Open;
-//      while not Qobs.Eof do
-//      begin
-//         lblOBS.Caption:=lblobs.Caption + QobsDESCRICAO.Text;
-//         Qobs.Next;
-//      end;
+      Qobs.close;
+      Qobs.Open;
+      while not Qobs.Eof do
+      begin
+         lblOBS.Caption:=lblobs.Caption + QobsDESCRICAO.Text;
+         Qobs.Next;
+      end;
 //        TamanhoPagina(RelServico);
       try
         frCliExtintor_2.lblDadosEmpresa1.Caption := DadosEmpresa;

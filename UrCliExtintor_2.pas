@@ -7,7 +7,7 @@ uses
   Dialogs, FMTBcd, jpeg, ppCtrls, ppPrnabl, ppClass, ppDB, ppBands,
   ppCache, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe, DB, DBClient,
   Provider, SqlExpr, ppViewr, ppStrtch, ppMemo, ppEndUsr, ppParameter,
-  ppDesignLayer;
+  ppDesignLayer, ppSubRpt;
 
 type
   TfrCliExtintor_2 = class(TForm)
@@ -125,6 +125,7 @@ type
     lblNormas2: TppLabel;
     ServicoNUMINMETRO: TStringField;
     ppDBText39: TppDBText;
+    ppLabel4: TppLabel;
     ppHeaderBand1: TppHeaderBand;
     ppLabel17: TppLabel;
     ppLabel18: TppLabel;
@@ -164,10 +165,11 @@ type
     ppLabel2: TppLabel;
     ppLine12: TppLine;
     ppLabel26: TppLabel;
-    lblDadosEmpresa2: TppLabel;
+    ppLabel27: TppLabel;
     ppLabel28: TppLabel;
     ppLabel29: TppLabel;
-    ppDBText20: TppDBText;
+    ppLabel32: TppLabel;
+    ppDBText40: TppDBText;
     ppDetailBand1: TppDetailBand;
     ppLine3: TppLine;
     ppDBText1: TppDBText;
@@ -188,15 +190,20 @@ type
     ppDBText8: TppDBText;
     ppLine14: TppLine;
     ppDBText10: TppDBText;
+    ppDBText20: TppDBText;
+    ppLine15: TppLine;
     ppFooterBand1: TppFooterBand;
     lblObs: TppLabel;
     ppLine13: TppLine;
     ppLabel25: TppLabel;
+    ppLabel31: TppLabel;
     ppSummaryBand1: TppSummaryBand;
     ppLine1: TppLine;
     lblNormas: TppLabel;
+    ppLabel30: TppLabel;
     ppDesignLayers1: TppDesignLayers;
     ppDesignLayer1: TppDesignLayer;
+    ppLabel36: TppLabel;
     procedure RelServicoPreviewFormCreate(Sender: TObject);
     procedure ServicoCalcFields(DataSet: TDataSet);
   private
